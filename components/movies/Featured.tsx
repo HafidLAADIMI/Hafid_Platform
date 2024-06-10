@@ -28,8 +28,8 @@ function Featured() {
   }, [type]);
 
   return (
-    <div className="backdrop-blur-sm bg-black/60 shadow-sm shadow-white  h-[95vh] w-[90vw] relative pl-[5%] mt-[7%] flex flex-col gap-7  rounded-lg max-sm:mt-[14%] pt-3 overflow-hidden pr-[5%] max-sm:h-[80vh] sm:h-[82vh] md:h-[86vh]  md:mt-[16%] lg:mt-[13%] xl:mt-[10%] xl:h-[95vh]">
-      <div className=" flex flex-row gap-10 m-4  text-xl p-4 w-72 selection: h-10 items-center ">
+    <div className="backdrop-blur-sm bg-black/60 shadow-sm shadow-white flex flex-col mx-10 gap-3 items-center justify-center py-4 w-[90vw] md:items-start md:mx-16 lg:mx-52 md:pl-10 md:w-[70vw] mt-12 md:mt-24" >
+      <div className=" flex flex-row items-center ">
         <label className="text-3xl cursor-pointer hover:text-red-700 text-red-600 ">
           {type === "movie" ? "Movies" : "Serie"}
         </label>
@@ -38,7 +38,7 @@ function Featured() {
           size={4}
           name="genre"
           id="genre"
-          className="text-black cursor-pointer bg-blue-700  flex w-[34vw] z-10 "
+          className="text-black cursor-pointer bg-blue-700  flex w"
         >
           <option>Genre</option>
           <option value="adventure">Adventure</option>
@@ -56,29 +56,28 @@ function Featured() {
           <option value="documentary">Documentary</option>
         </select>
       </div>
-     
-        <Image
-          src={film.img}
-          height={500}
-          width={500}
-          alt="imge"
-          className="rounded-lg contain-content hover:scale-105 cursor-pointer transition ease-in-out duration-150  "
-        />
-      
+
+      <Image
+        src={film.img}
+        height={500}
+        width={500}
+        alt="imge"
+        className="rounded-lg object-contain hover:scale-105 cursor-pointer transition ease-in-out duration-300 h-[300px] w-[400px] lg:h-[400px] lg:w-[500px] mx-4 md:mx-7"
+      />
 
       <p
         className="text-wrapper text-xl
-       max-w-[50%] sm:text-teal-400 md:text-yellow-300 lg:text-green-500 xl:text-red-600 2xl:text-purple-600  "
+        "
       >
         {film.desc}
       </p>
-      <div className="flex flex-row gap-4">
-        <button className=" pr-3 shadow-lg active:text-white active:bg-slate-700 active:border-1  rounded h-12 w-24 text-xl pl-2 transition ease-in-out duration-150  flex gap-3 flex-row items-center cursor-pointer hover:bg-slate-500 hover:text-white bg-white text-black">
-          <FaRegCirclePlay className="text-3xl" />
+      <div className="flex flex-row gap-3 ">
+        <button className=" pr-3 shadow-lg active:text-white active:bg-slate-700 active:border-1  rounded p-3 transition ease-in-out duration-200 gap-3 flex flex-row items-center cursor-pointer hover:bg-slate-500 hover:text-white bg-white text-black">
+          <FaRegCirclePlay className="text-2xl" />
           <label className="cursor-pointer">Play</label>
         </button>
-        <button className=" pr-3 shadow-lg active:text-white active:bg-slate-700 active:border-1  rounded h-12 w-24 text-xl pl-2 transition ease-in-out duration-150  flex gap-3 flex-row items-center cursor-pointer hover:bg-slate-500 hover:text-white bg-white text-black">
-          <FaInfoCircle className="text-3xl" />
+        <button className="  shadow-lg active:text-white active:bg-slate-700 active:border-1  rounded p-3  transition ease-in-out duration-200  flex gap-3 flex-row items-center cursor-pointer hover:bg-slate-500 hover:text-white bg-white text-black">
+          <FaInfoCircle className="text-2xl" />
           <label className="cursor-pointer">Info</label>
         </button>
       </div>

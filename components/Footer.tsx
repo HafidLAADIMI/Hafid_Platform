@@ -10,7 +10,7 @@ import {
 
 function Footer() {
   return (
-    <div className="backdrop-blur-sm bg-white/30 shadow-sm shadow-white flex flex-col items-center mt-12 gap-8 p-6 w-full text-amber-400 rounded-lg">
+    <div className="backdrop-blur-sm bg-white/30 shadow-sm shadow-white flex flex-col items-center mt-12 gap-8 p-6 w-full text-amber-600 rounded-lg">
       <div className="flex flex-row gap-8">
         <FaFacebook className="text-3xl cursor-pointer hover:bg-red-600 hover:text-black rounded-lg transition ease-in-out duration-150" />
         <FaInstagram className="text-3xl cursor-pointer hover:bg-red-600 hover:text-black rounded-lg transition ease-in-out duration-150" />
@@ -39,7 +39,7 @@ function Footer() {
           Contact us
         </Link>
         <FaCopyright className="text-xl cursor-pointer hover:bg-red-600 hover:text-black rounded-lg transition ease-in-out duration-150" />
-        <p className="text-amber-400 cursor-pointer hover:text-black transition ease-in-out duration-150">
+        <p className="text-amber-600 cursor-pointer hover:text-black transition ease-in-out duration-150">
           All rights reserved
         </p>
       </div>

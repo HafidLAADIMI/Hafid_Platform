@@ -29,8 +29,8 @@ function Navmovies() {
   }, []);
 
   return (
-    <div className="fixed w-screen z-50 ">
-      <div className="fixed  right-[%] z-20 md:hidden top-2  ">
+    <div className="fixed w-screen z-50 top-0">
+      <div className="fixed  right-[%] z-20 md:hidden  ">
         <FaBars
           className={`text-3xl text-white bg-black hover:scale-105 transition ease-in duration-150 hover:bg-white hover:text-black rounded-lg shadow-sm ${
             navbar ? "hidden" : "block"

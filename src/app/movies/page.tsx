@@ -11,7 +11,6 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 import { useTypeContext } from "@/typeContext";
 
-
 function Page() {
   const { data: session } = useSession();
   const { type } = useTypeContext();
@@ -29,8 +28,7 @@ function Page() {
         );
         if (response) {
           setLists(response.data.list);
-          console.log(response.data.list)
-
+          console.log(response.data.list);
         } else {
           setError("there is no response");
         }
@@ -46,15 +44,7 @@ function Page() {
   const bg = "/bgCool4.jpg";
   if (session)
     return (
-      <div
-      style={{
-        backgroundImage: `url(${body}) `,
-        backgroundAttachment: "fixed",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}
-          className=" backdrop-blur-sm relative bg-white/30 items-center font-sans w-screen flex flex-col gap-10 overflow-hidden"
-      >
+      <div className=" bg-black backdrop-blur-sm relative  items-center font-sans w-screen flex flex-col gap-10 overflow-hidden">
         <Navmovies />
         <Featured />
         {lists.map((list, i) => (
@@ -65,25 +55,20 @@ function Page() {
   else
     return (
       <div
-      style={{
-        backgroundImage: `url(${body}) `,
-        backgroundAttachment: "fixed",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}
-        className=" backdrop-blur-sm bg-black/60 items-center justify-center flex font-sans h-screen w-screen "
+        style={{}}
+        className="  bg-black items-center justify-center flex font-sans h-screen w-screen "
       >
-        <div className="flex flex-col backdrop-blur-sm bg-black/60 shadow-sm shadow-white h-[80vh] w-[40vw] gap-10 pt-3 pb-32 items-center rounded-lg max-sm:w-[90vw] max-sm:h-[85vh] sm:w-[70vw] sm:h-[85vh] md:w-[70vw] md:h-[60vh] lg:w-[50vw] lg:h-[60vh] xl:w-[30vw] xl:h-[90vh]">
+        <div className="flex flex-col backdrop-blur-sm bg-black/60 shadow-sm shadow-white gap-2 items-center rounded-lg p-4  m-10 md:mx-36 lg:mx-52 xl:mx-64">
           <Link href="/">
             <Image
               src={logo}
               height={300}
               width={400}
               alt="logo"
-              className="h-[32vh] w-[24vw] object-contain shadow-sm shadow-white hover:scale-105 transition ease-in duration-500 cursor-pointer max-sm:h-[15vh] max-sm:w-[40vw] sm:h-[18vh] sm:w-[40vw] md:w-[30vw] lg:w-[15vw]  "
+              className=" h-[250px] w-[350px]  object-contain hover:scale-105 transition ease-in duration-500 cursor-pointer   "
             />
           </Link>
-          <p className=" break-words whitespace-normal text-ellipsis ml-2">
+          <p className=" break-words whitespace-normal text-ellipsis ">
             Welcome to{" "}
             <span className="text-amber-500 cursor-pointer">
               {" "}

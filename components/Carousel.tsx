@@ -27,16 +27,16 @@ function Carousel({ slides }) {
   }, [next]);
 
   return (
-    <div className=" overflow-hidden relative ">
+    <div className=" overflow-hidden relative items-center justify-center ">
       <div
         className=" flex transition-transform ease-in-out duration-150 rounded-lg hover:rounded-lg "
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
         {slides.map((img,i) => (
-          <Image height={500} width={500} key={i} alt="img" src={img} className="rounded-lg hover:rounded-lg hover:scale-105 transition ease-in-out duration-150 cursor-pointer w-[40vw]  bg-cover max-sm:w-[75vw] max-sm:h-[25vh] sm:w-[49vw] sm:h-[25vh] md:pt-0 md:h-[35vh] md:w-[59vw] lg:h-[42vh] lg:w-[100vw] xl:h-[45vh] xl:w-[53vw] object-contain " />
+          <Image height={500} width={500} key={i} alt="img" src={img} className="rounded-lg hover:rounded-lg hover:scale-105 transition ease-in-out duration-150 cursor-pointer object-contain" />
         ))}
       </div>
-        <div className=" bottom-0 ml-[47%] absolute z-1 flex justify-center flex-row gap-3 max-sm:ml-[35%]  sm:ml-[35%] md:ml-[40%]">
+        <div className=" bottom-0 absolute z-1 flex justify-center flex-row gap-3  right-0 left-0">
           {slides.map((_, i) => (
             <div
               key={i}

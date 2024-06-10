@@ -2,8 +2,8 @@
 import React from "react";
 import Link from "next/link";
 import { IoCloseSharp } from "react-icons/io5";
-import { useState } from "react";
 import { FaBars } from "react-icons/fa6";
+import { useState } from "react";
 
 function Navbar() {
   const [isClicked, setIsClicked] = useState(false);

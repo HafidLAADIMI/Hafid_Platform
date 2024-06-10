@@ -39,34 +39,25 @@ function AuthFrom({ session }: Props) {
     await signIn("github", { callbackUrl: "/movies" });
   };
 
-  const body = "/bgbody2.avif";
   if (!session) {
     return (
-      <div
-        style={{
-          backgroundImage: `url(${body}) `,
-          backgroundAttachment: "fixed",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-        className=" flex h-screen flex-row w-screen justify-center items-center p-5 "
-      >
+      <div className=" bg-black flex h-screen flex-row w-screen justify-center items-center  ">
         <form
           onSubmit={login}
-          className="flex flex-col mt-[4%] backdrop-blur-sm bg-black/60  h-[80vh] w-[40vw] gap-12 items-center shadow-sm rounded-lg shadow-white max-sm:w-[90vw] max-sm:h-[60vh]  sm:w-[70vw] sm:h-[70vh] justify-center sm:gap-16 md:w-[60vw] lg:w-[50vw] xl:w-[40vw] xl:gap-12 "
+          className="flex flex-col mt-[4%] backdrop-blur-sm bg-black/60   gap-12 items-center shadow-sm rounded-lg shadow-white mx-4 pb-3 "
         >
           <p>{error && error}</p>
           <input
             type="email"
             placeholder="Email"
             name="email"
-            className="  text-slate-200 h-10 bg-amber-700 rounded-lg shadow-md items-center pl-4 outline-none "
+            className="  text-slate-200 h-10 bg-amber-700 rounded-lg shadow-md items-center pl-4 outline-none mx-3"
           />
           <input
             type="password"
             placeholder="Password"
             name="password"
-            className="  text-slate-200 h-10 bg-amber-700 rounded-lg shadow-md items-center pl-4 outline-none "
+            className="  text-slate-200 h-10 bg-amber-700 rounded-lg shadow-md items-center pl-4 outline-none mx-3"
           />
           <div className="flex flex-row gap-2">
             <button
@@ -86,7 +77,7 @@ function AuthFrom({ session }: Props) {
             className="bg-amber-700 h-10 w-24 rounded-lg shadow-md hover:bg-amber-800 hover:scale-105 transition ease-in duration-300 active:bg-amber-900 text-slate-200 flex flex-row items-center gap-1 pl-1"
             onSubmit={githubLogin}
           >
-            <FaGithub className=" text-xl" />
+            <FaGithub className=" text-xl " />
             GitHub
           </button>
         </form>
@@ -94,23 +85,16 @@ function AuthFrom({ session }: Props) {
     );
   } else
     return (
-      <div
-      style={{
-        backgroundImage: `url(${body}) `,
-        backgroundAttachment: "fixed",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}
-        className=" backdrop-blur-sm bg-black/60 items-center justify-center flex font-sans h-screen w-screen "
-      >
-        <div className="flex flex-col backdrop-blur-sm bg-black/60 shadow-sm shadow-white h-[80vh] w-[40vw] gap-10 pt-3 pb-32 items-center rounded-lg max-sm:w-[90vw] max-sm:h-[60vh] sm:w-[70vw] sm:h-[60vh] md:w-[60vw] lg:w-[50vw] xl:w-[30vw] xl:h-[70vh]">
+   
+      <div className="bg-black items-center justify-center  flex font-sans h-screen w-screen ">
+        <div className="flex flex-col backdrop-blur-sm bg-black/60 shadow-sm shadow-white justify-center items-center mx-10 py-3 md:mx-24 lg:mx-56 xl:mx-64 gap-5 rounded-lg">
           <Link href="/">
             <Image
               src={logo}
               height={300}
               width={400}
               alt="logo"
-              className="h-[32vh] w-[24vw] object-contain shadow-sm shadow-white hover:scale-105 transition ease-in duration-500 cursor-pointer max-sm:h-[15vh] max-sm:w-[40vw] sm:h-[18vh] sm:w-[40vw] md:w-[30vw] lg:w-[15vw]  "
+              className=" object-contain  hover:scale-105 transition ease-in duration-500 cursor-pointer h-[290px] w-[390px] rounded-lg "
             />
           </Link>
           <h1 className=" break-words text-ellipsis whitespace-normal ml-2">

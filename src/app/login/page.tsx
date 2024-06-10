@@ -73,22 +73,17 @@ function page() {
   const body = "/bgbody2.avif";
   return (
     <div
-    style={{
-      backgroundImage: `url(${body}) `,
-      backgroundAttachment: "fixed",
-      backgroundRepeat: "no-repeat",
-      backgroundSize: "cover",
-    }}
-      className=" flex h-screen flex-row w-screen justify-center items-center p-5 "
+  
+      className=" bg-black flex h-screen flex-row w-screen justify-center items-center  "
     >
       <form
         onSubmit={registerUser}
-        className="flex flex-col mt-[4%] backdrop-blur-sm bg-black/60  h-[80vh] w-[40vw] gap-12 items-center shadow-sm rounded-lg shadow-white max-sm:w-[90vw] max-sm:h-[60vh]  sm:w-[70vw] sm:h-[70vh] justify-center sm:gap-16 md:w-[60vw] lg:w-[50vw] xl:w-[40vw] xl:gap-12 "
+        className="flex flex-col mt-[4%] backdrop-blur-sm bg-black/60 gap-12  items-center shadow-sm rounded-lg shadow-white p-4  "
         >
         <p>{error && error}</p>
-        <input type="email" placeholder="Email" required className="  text-slate-200 flex h-10  bg-amber-700 rounded-lg shadow-md items-center pl-4 outline-none  " />
+        <input type="email" placeholder="Email" required className="  text-slate-200 flex h-10 mx-1 pl-3 bg-amber-700 rounded-lg shadow-md items-center outline-none  " />
         <input type="password" placeholder="password" required className=" text-slate-200
-         h-10 bg-amber-700 rounded-lg shadow-md items-center pl-4 outline-none " />
+         h-10 bg-amber-700 pl-3 rounded-lg shadow-md items-center mx-1 outline-none " />
         <button type="submit" className=" bg-amber-700 h-10 w-24 rounded-lg shadow-md hover:bg-amber-800 hover:scale-105 transition ease-in duration-300 active:bg-amber-900 text-slate-200">Register</button>
         <button className="bg-amber-700 h-10 w-24 rounded-lg shadow-md hover:bg-amber-800 hover:scale-105 transition ease-in duration-300 active:bg-amber-900 text-slate-200"><Link href="/login">Back</Link></button>
       </form>
