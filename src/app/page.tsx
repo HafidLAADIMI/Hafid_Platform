@@ -1,22 +1,10 @@
 "use client";
 import Image from "next/image";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
-import movies from "./images/movie.jpg";
-import pic2 from "./images/pic2.jpeg";
 import Navbar from "../../components/navbar/Navbar";
-
-// fade
-
 import Carousel from "../../components/Carousel";
 import Footer from "../../components/Footer";
-import Link from "next/link";
-import { Metadata } from "next";
 
-const metadata: Metadata = {
-  title: "Home page",
-  description: "the home page of Hafid Platform",
-  metadataBase: new URL("http://loclahost:3000"),
-};
 
 export default function Home() {
   const logo = "/mylogo.png";
@@ -25,18 +13,16 @@ export default function Home() {
   const book2 = "/book4.jpeg";
   const book3 = "/book5.jpeg";
   const book4 = "/book6.jpeg";
-  const anime="/anim.avif"
-  const body = "/bgbody2.avif";
+  const anime = "/anim.avif";
   const slides = [book4, book2, book1, book3];
   // autotyping
   const [text] = useTypewriter({
     words: ["Movies", "Animes", "Books", ""],
-    loop: {},
+    loop: 0,
   });
 
   return (
     <div
-      
       className=" bg-black flex h-full flex-col 
     w-screen overflow-hidden justify-between relative items-center   "
     >
@@ -55,7 +41,7 @@ export default function Home() {
             {" "}
             Dive into the world of entertainment with Hafid Platform! Discover a
             universe of captivating stories and thrilling adventures waiting for
-            you. Whether you're into!
+            you. Whether you are into!
             <span className="text-red-600">{text}</span> <Cursor />
           </p>
         </div>
@@ -77,7 +63,7 @@ export default function Home() {
             the latest blockbusters, our diverse selection caters to every taste
             and genre. Discover gripping narratives, stunning visuals, and
             unforgettable performances that will transport you to new worlds and
-            evoke a range of emotions. Whether you're seeking heart-pounding
+            evoke a range of emotions. Whether you are seeking heart-pounding
             action, heartwarming drama, or side-splitting comedy, our collection
             has something for everyone. Join us on a cinematic journey and
             unlock the magic of storytelling today!
@@ -101,10 +87,10 @@ export default function Home() {
             Embark on an extraordinary adventure into the captivating world of
             anime with our meticulously curated collection. From iconic classics
             to the latest releases, our diverse selection encompasses a wide
-            range of genres and styles, ensuring there's something for every
+            range of genres and styles, ensuring there is something for every
             anime enthusiast. Immerse yourself in gripping storylines,
             breathtaking animation, and memorable characters that will whisk you
-            away to fantastical realms and stir your emotions. Whether you're
+            away to fantastical realms and stir your emotions. Whether you are
             craving exhilarating action, heartwarming romance, or mind-bending
             fantasy, our anime collection promises to delight and inspire. Join
             us on an anime odyssey and unlock the magic of storytelling today!
@@ -122,13 +108,13 @@ export default function Home() {
         <div className="flex  m-4 text-wrap  border-box ">
           <p className="  text-xl text-amber-600 ">
             {" "}
-            "Explore our diverse collection of books, from classics to
+            Explore our diverse collection of books, from classics to
             bestsellers. Lose yourself in captivating stories and inspiring
-            characters. Whether you're into thrilling mysteries, heartwarming
+            characters. Whether you are into thrilling mysteries, heartwarming
             romance, or thought-provoking non-fiction, we have something for
             every reader. Embark on literary adventures that will transport you
             to different worlds and spark your imagination. Join us and discover
-            the joy of reading today!"
+            the joy of reading today!
           </p>
         </div>
       </div>
