@@ -1,12 +1,14 @@
 import Image from "next/image";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { useCallback, useEffect, useRef, useMemo, useState } from "react";
-interface type{
-  img:any,
-  i:any,
+interface Item{
+  img:string
 }
-function Carousel({ slides }) {
-  const timeRef = useRef(null);
+interface SlideProps{
+  slides:string[]
+}
+function Carousel({ slides }:SlideProps) {
+  const timeRef = useRef<NodeJS.Timeout | null>(null);
   const [index, setIndex] = useState(0);
   const prev = () => {
     if (index === 0) setIndex(slides.length - 1);
@@ -23,7 +25,7 @@ function Carousel({ slides }) {
     timeRef.current = setTimeout(() => {
       next();
     }, 1000);
-    return () => clearTimeout(timeRef.current);
+    return () => {timeRef.current && clearTimeout(timeRef.current);}
   }, [next]);
 
   return (

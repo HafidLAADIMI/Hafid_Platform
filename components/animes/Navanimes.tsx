@@ -6,9 +6,11 @@ import { RxAvatar } from "react-icons/rx";
 import { MdOutlineLogout } from "react-icons/md";
 import { IoCloseSharp } from "react-icons/io5";
 import { FaBars } from "react-icons/fa6";
+import { useSearchAnimeContext } from "@/searchAnimeContext";
 import Image from "next/image";
 function Navanimes() {
   const logo = "/logo.svg";
+  const {setSearchAnime}=useSearchAnimeContext();
   const [isClicked, setIsClicked] = useState<boolean>(true);
   const [navbar, setNavbar] = useState(false);
   const clickLogo = () => {
@@ -60,6 +62,7 @@ function Navanimes() {
             <input
               className="outline-none border-2 transition ease-in-out duration-150 hover:scale-105 text-black border-black rounded-lg pl-2 p-1"
               placeholder="search"
+              onChange={(e) => setSearchAnime(e.target.value)}
             />
             <FaSearch className={`cursor-pointer hover:scale-105 size-6 `} />
           </div>
@@ -110,6 +113,7 @@ function Navanimes() {
             <input
               className="outline-none flex border-2 transition ease-in-out w-[30vw] duration-150 hover:scale-105 text-black border-black rounded-lg pl-2 p-1"
               placeholder="search"
+              onChange={(e) => setSearchAnime(e.target.value)}
             />
             <FaSearch className={`cursor-pointer hover:scale-105 size-6 `} />
           </div>

@@ -113,7 +113,7 @@ function Page() {
         )}
       </div>
       {episode && info?.images.webp.image_url && (
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 place-items-center gap-2">
+        <div className="grid w-screen grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 place-items-center gap-2">
           {episode.map((item) => (
             <Episode key={1} item={item} img={info?.images.webp.image_url}/>
           ))}

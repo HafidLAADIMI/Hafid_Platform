@@ -1,9 +1,26 @@
 "use client";
 import React, { useState } from "react";
 import Items from "../movies/Items";
-import { MdOutlineArrowForwardIos, MdOutlineArrowBackIosNew } from "react-icons/md";
+import {
+  MdOutlineArrowForwardIos,
+  MdOutlineArrowBackIosNew,
+} from "react-icons/md";
+interface Item {
+  id: number;
+  title: string;
+  desc: string;
+  img: string;
+  video: string;
+}
 
-function ListItems({ list }) {
+interface List {
+  content: Item[];
+}
+
+interface ListItemsProps {
+  list: List;
+}
+function ListItems({ list }: ListItemsProps) {
   const items = list.content;
   const [index, setIndex] = useState(0);
   const itemsPerView = Math.floor(window.innerWidth / 288); // Adjust this based on item width

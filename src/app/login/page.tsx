@@ -10,7 +10,7 @@ import { Metadata } from "next";
   description: 'The official Next.js Course Dashboard, built with App Router.',
   metadataBase: new URL('http://localhost:3000/login'),
 };
-function page() {
+function Page() {
   const bg = "/bgGold1.jpg";
   const [error, setError] = useState("");
   const router = useRouter();
@@ -91,4 +91,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

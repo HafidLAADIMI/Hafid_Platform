@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "./provieder";
 import { TypeContextWrapper } from "@/typeContext";
 import { MovieContextWrapper } from "@/watchContext";
-const inter = Inter({ subsets: ["latin"] });
+import { SearchAnimeContextWrapper } from "@/searchAnimeContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,7 +21,9 @@ export default function RootLayout({
         <div className="container ">
           <Providers>
             <TypeContextWrapper>
-              <MovieContextWrapper>{children}</MovieContextWrapper>
+              <MovieContextWrapper>
+                <SearchAnimeContextWrapper>{children}</SearchAnimeContextWrapper>
+              </MovieContextWrapper>
             </TypeContextWrapper>
           </Providers>
         </div>
