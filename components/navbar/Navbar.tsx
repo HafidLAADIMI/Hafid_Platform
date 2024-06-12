@@ -51,7 +51,7 @@ function Navbar() {
         </Link>
         <Link
           className="tex rounded transition ease-in duration-200 bg-black text-white shadow-black shadow-md hover:bg-white hover:text-black hover:scale-105"
-          href="/auth"
+          href="/animes"
         >
           Animes
         </Link>
@@ -85,7 +85,7 @@ function Navbar() {
         </Link>
         <Link
           className="tex rounded transition ease-in duration-200 bg-black text-white shadow-black shadow-md hover:bg-white hover:text-black hover:scale-105"
-          href="/auth"
+          href="/animes"
         >
           Animes
         </Link>

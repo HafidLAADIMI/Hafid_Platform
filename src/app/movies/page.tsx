@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Navmovies from "../../../components/movies/Navmovies";
 import Featured from "../../../components/movies/Featured";
-import ListItem from "../../../components/test/ListItems";
-import { auth } from "../../../auth";
+import ListItem from "../../../components/movies/ListItems";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
