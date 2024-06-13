@@ -4,7 +4,7 @@ import { useTypewriter, Cursor } from "react-simple-typewriter";
 import Navbar from "../../components/navbar/Navbar";
 import Carousel from "../../components/Carousel";
 import Footer from "../../components/Footer";
-
+import Link from "next/link";
 
 export default function Home() {
   const logo = "/mylogo.png";
@@ -17,7 +17,7 @@ export default function Home() {
   const slides = [book4, book2, book1, book3];
   // autotyping
   const [text] = useTypewriter({
-    words: ["Movies", "Animes", "Books", ""],
+    words: ["Movies", "Animes", "Books"],
     loop: 0,
   });
 
@@ -33,9 +33,8 @@ export default function Home() {
           height={300}
           width={400}
           alt="logo"
-          className="object-contain h-[300] w-[400] rounded-lg cursor-pointer hover:scale-105 transition ease-in duration-300 "
+          className="object-contain h-[240px] w-[340px] rounded-lg cursor-pointer hover:scale-105 transition ease-in duration-300 "
         />
-
         <div className=" flex m-4 text-wrap text-xl border-box overflow-hidden min-h-[150px]  text-amber-600 ">
           <p>
             {" "}
@@ -53,7 +52,7 @@ export default function Home() {
           height={300}
           width={400}
           alt="logo"
-          className="object-contain flex h-[300px] w-[400px] rounded-lg cursor-pointer hover:scale-105 transition ease-in duration-300 "
+          className="object-contain flex h-[240px] w-[340px] rounded-lg cursor-pointer hover:scale-105 transition ease-in duration-300 "
         />
 
         <div className=" flex flex-col m-4 text-wrap  border-box   ">
@@ -69,7 +68,9 @@ export default function Home() {
             unlock the magic of storytelling today!
           </p>
           <button className="bg-blue-600 h-7 w-14 rounded ml-4 mt-2 cursor-pointer shadow-md active:bg-blue-700 shadow-slate-600 transiton ease-in-out duration-500 hover:scale-105 text-xs ">
+            <Link href='/movies' >
             See more{" "}
+            </Link>
           </button>
         </div>
       </div>
@@ -79,7 +80,7 @@ export default function Home() {
           height={300}
           width={400}
           alt="logo"
-          className="object-contain h-[300px] w-[400px]  rounded-lg cursor-pointer hover:scale-105 transition ease-in duration-300  "
+          className="object-contain h-[240px] w-[340px] rounded-lg cursor-pointer hover:scale-105 transition ease-in duration-300  "
         />
 
         <div className=" flex flex-col m-4 text-wrap  border-box   ">
@@ -96,7 +97,9 @@ export default function Home() {
             us on an anime odyssey and unlock the magic of storytelling today!
           </p>
           <button className="bg-blue-600 h-7 w-14 rounded ml-4 mt-2 cursor-pointer shadow-md active:bg-blue-700 shadow-slate-600 transiton ease-in-out duration-500 hover:scale-105 text-xs ">
+            <Link href='/animes'>
             See more{" "}
+            </Link>
           </button>
         </div>
       </div>

@@ -112,13 +112,13 @@ function Home() {
         ))}
       </div>
       <h1>Top Animes</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 place-items-center gap-2">
+      <div className="grid w-screen grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 place-items-center gap-2">
         {top.map((item) => (
           <CardAnime key={1} item={item} />
         ))}
       </div>
       <h1>Upcoming Seasons</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 place-items-center gap-2">
+      <div className="grid w-screen grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 place-items-center gap-2">
         {upcoming.map((item) => (
           <CardAnime key={1} item={item} />
         ))}

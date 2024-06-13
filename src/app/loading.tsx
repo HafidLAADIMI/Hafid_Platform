@@ -1,11 +1,11 @@
-import React from 'react'
-
+import React from "react";
+import { Ellipsis } from "react-css-spinners";
 function loading() {
   return (
-    <div className='h-screen w-screen items-center'>
-        <h1 className=' backdrop-blur-sm bg-amber-600 text-white '>please be patient</h1>
+    <div className=" bg-black h-screen w-screen flex  justify-center items-center">
+      <Ellipsis color="rgba(240,229,240,1)" size={86} />
     </div>
-  )
+  );
 }
 
-export default loading
+export default loading;
