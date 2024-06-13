@@ -6,7 +6,7 @@ import ListItem from "../../../components/movies/ListItems";
 
 import Link from "next/link";
 import Image from "next/image";
-import { Metadata } from "next";
+
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import { useTypeContext } from "@/typeContext";
@@ -38,10 +38,10 @@ function Page() {
       }
     };
     fetchRandomList();
-  }, []);
-  const body = "/bgbody2.avif";
+  }, [genre, type]);
+
   const logo = "/mylogo.png";
-  const bg = "/bgCool4.jpg";
+
   if (session)
     return (
       <div className=" bg-black backdrop-blur-sm relative  items-center font-sans w-screen flex flex-col gap-10 overflow-hidden">
@@ -75,14 +75,16 @@ function Page() {
               <Link href="/">Hafid Platform</Link>{" "}
             </span>{" "}
             , your premier destination for streaming the latest and greatest
-            movies! We're thrilled to have you here. To get the most out of your
-            experience, please sign in or create an account. By joining us,
-            you'll unlock access to our extensive library of films, personalized
-            recommendations, and the ability to create your own watchlist. Don't
-            miss out on the excitement—sign in if you're already a member, or
-            sign up to start your cinematic adventure with Hafid Platform today!
+            movies! We are thrilled to have you here. To get the most out of
+            your experience, please sign in or create an account. By joining us,
+            you will unlock access to our extensive library of films,
+            personalized recommendations, and the ability to create your own
+            watchlist. Do not miss out on the excitement—sign in if you are
+            already a member, or sign up to start your cinematic adventure with
+            Hafid Platform today!
           </p>
           <div className="flex flex-row gap-2">
+            <p>{error}</p>
             <button
               className="bg-amber-700 h-10 w-24 rounded-lg shadow-md hover:bg-amber-800 hover:scale-105 transition ease-in duration-300 active:bg-amber-900 text-slate-200"
               type="submit"

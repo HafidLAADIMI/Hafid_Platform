@@ -104,7 +104,7 @@ function AuthFrom({ session }: Props) {
               <Link href="/">Hafid Platform</Link>{" "}
             </span>{" "}
             ? We hope you enjoyed your time watching movies with us. If you sign
-            out, you’ll need to log back in to continue accessing your
+            out, you will need to log back in to continue accessing your
             personalized recommendations and watchlist. See you again soon!
           </h1>
 

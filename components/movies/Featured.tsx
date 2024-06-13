@@ -5,10 +5,13 @@ import { FaRegCirclePlay } from "react-icons/fa6";
 import { FaInfoCircle } from "react-icons/fa";
 import { useTypeContext } from "@/typeContext";
 import axios from "axios";
+interface Film {
+  img: string;
+  desc: string;
+}
 function Featured() {
-  const bg = "/bgCool2.jpg";
   const { type } = useTypeContext();
-  const [film, setFilm] = useState([]);
+  const [film, setFilm] = useState<Film | null>(null);
   const [error, setError] = useState<any>();
   useEffect(() => {
     const fetchRandomMovie = async () => {
@@ -28,7 +31,7 @@ function Featured() {
   }, [type]);
 
   return (
-    <div className="backdrop-blur-sm bg-black/60 shadow-sm shadow-white flex flex-col mx-10 gap-3 items-center justify-center py-4 w-[90vw] md:items-start md:mx-16 lg:mx-52 md:pl-10 md:w-[70vw] mt-12 md:mt-24" >
+    <div className="backdrop-blur-sm bg-black/60 shadow-sm shadow-white flex flex-col mx-10 gap-3 items-center justify-center py-4 w-[90vw] md:items-start md:mx-16 lg:mx-52 md:pl-10 md:w-[70vw] mt-12 md:mt-24">
       <div className=" flex flex-row items-center ">
         <label className="text-3xl cursor-pointer hover:text-red-700 text-red-600 ">
           {type === "movie" ? "Movies" : "Serie"}
@@ -56,20 +59,20 @@ function Featured() {
           <option value="documentary">Documentary</option>
         </select>
       </div>
-
-      <Image
-        src={film.img}
-        height={500}
-        width={500}
-        alt="imge"
-        className="rounded-lg object-contain hover:scale-105 cursor-pointer transition ease-in-out duration-300 h-[300px] w-[400px] lg:h-[400px] lg:w-[500px] mx-4 md:mx-7"
-      />
-
+      {film?.img && (
+        <Image
+          src={film?.img}
+          height={500}
+          width={500}
+          alt="imge"
+          className="rounded-lg object-contain hover:scale-105 cursor-pointer transition ease-in-out duration-300 h-[300px] w-[400px] lg:h-[400px] lg:w-[500px] mx-4 md:mx-7"
+        />
+      )}
       <p
         className="text-wrapper text-xl
         "
       >
-        {film.desc}
+        {film?.desc}
       </p>
       <div className="flex flex-row gap-3 ">
         <button className=" pr-3 shadow-lg active:text-white active:bg-slate-700 active:border-1  rounded p-3 transition ease-in-out duration-200 gap-3 flex flex-row items-center cursor-pointer hover:bg-slate-500 hover:text-white bg-white text-black">

@@ -5,8 +5,19 @@ import React, { useState } from "react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { CiPlay1 } from "react-icons/ci";
 import { useMovieContext } from "@/watchContext";
+interface Item {
+  id: number;
+  title: string;
+  desc: string;
+  img: string;
+  video: string;
+}
 
-function Items({ index, items }) {
+interface ItemsProps {
+  index: number;
+  items: Item;
+}
+function Items({ index, items }:ItemsProps) {
   const { setUrl } = useMovieContext();
   setUrl(items.video);
   const trailer = items.video;

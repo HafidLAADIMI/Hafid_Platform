@@ -5,7 +5,7 @@ import { IoArrowBackSharp } from "react-icons/io5";
 import { useMovieContext } from "@/watchContext";
 const Watch = () => {
   const {url}=useMovieContext();
-  const trailer = {url};
+  const trailer :any = {url};
   return (
     <div className="h-screen w-screen relative">
       <Link href='/movies' className="z-10 cursor-pointer flex flex-row text-2xl items-center">

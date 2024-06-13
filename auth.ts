@@ -5,7 +5,10 @@ import GitHub from "next-auth/providers/github";
 import userSchema from "./src/app/Backend/models/User";
 import connectDb from "@/app/Backend/models/db";
 import bcrypt from "bcryptjs";
-
+interface credentials{
+   email:string,
+  password:string
+}
 const credentialsConfig = CredentialsProvider({
   name: "Credentials",
   credentials: {
@@ -26,7 +29,7 @@ const credentialsConfig = CredentialsProvider({
 
       if (existUser) {
         const isPasswordCorrect = await bcrypt.compare(
-          credentials.password,
+          credentials.password as string,
           existUser.password
         );
 

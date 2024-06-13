@@ -5,12 +5,22 @@ import React from "react";
 import CardAnime from "../CardAnime";
 import axios from "axios";
 import { useSearchAnimeContext } from "@/searchAnimeContext";
+interface AnimeItem {
+  mal_id: number;
+  title: string;
+  score: number;
+  images: {
+    webp: {
+      image_url: string;
+    };
+  };
+}
 function Home() {
-  const [season, setSeason] = useState([]);
-  const [top, setTop] = useState([]);
-  const [upcoming, setUpcoming] = useState([]);
+  const [season, setSeason] = useState<AnimeItem[]>([])
+  const [top, setTop] = useState<AnimeItem[]>([]);
+  const [upcoming, setUpcoming] = useState<AnimeItem[]>([]);
   const {searchAnime}=useSearchAnimeContext();
-  console.log({upcoming})
+
 
   useEffect(() => {
     const getSeasonNow = async () => {
@@ -52,7 +62,7 @@ function Home() {
   }, []);
   useEffect(() => {
     if (searchAnime) {
-      const filteredSeason = season.filter((item) => item.title.toLowerCase().includes(searchAnime.toLowerCase()));
+      const filteredSeason = season?.filter((item)  => item.title.toLowerCase().includes(searchAnime.toLowerCase()));
       setSeason(filteredSeason);
       const filteredTop = top.filter((item) => item.title.toLowerCase().includes(searchAnime.toLowerCase()));
       setTop(filteredTop);
