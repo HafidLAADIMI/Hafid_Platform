@@ -13,10 +13,11 @@ function Featured() {
   const { type } = useTypeContext();
   const [film, setFilm] = useState<Film | null>(null);
   const [error, setError] = useState<any>();
+  const apiUrl = process.env.AUTH_URL;
   useEffect(() => {
     const fetchRandomMovie = async () => {
       try {
-        const response = await axios.get(`/api/getRandomMovie?type=${type}`);
+        const response = await axios.get(`${apiUrl}/api/getRandomMovie?type=${type}`);
         if (response) {
           setFilm(response.data.movie[0]);
         } else {
@@ -28,10 +29,10 @@ function Featured() {
       }
     };
     fetchRandomMovie();
-  }, [type]);
+  }, [type,apiUrl]);
 
   return (
-    <div className="backdrop-blur-sm bg-black/60 shadow-sm shadow-white flex flex-col mx-10 gap-3 items-center justify-center py-4 w-[90vw] md:items-start md:mx-16 lg:mx-52 md:pl-10 md:w-[70vw] mt-12 md:mt-24">
+    <div className="backdrop-blur-sm box-border px-1 bg-slate-800/70 border border-slate-700 border-solid mt-24 flex flex-col mx-10 gap-3 items-center justify-center py-4 w-[90vw] md:items-start md:mx-16 lg:mx-52 md:pl-10 md:w-[70vw]  md:mt-24">
       <div className=" flex flex-row items-center ">
         <label className="text-3xl cursor-pointer hover:text-red-700 text-red-600 ">
           {type === "movie" ? "Movies" : "Serie"}
@@ -59,17 +60,20 @@ function Featured() {
           <option value="documentary">Documentary</option>
         </select>
       </div>
+        <div className="h-[290px] w-[390px] lg:h-[380px] lg:w-[490px] overflow-hidden">
       {film?.img && (
+
         <Image
           src={film?.img}
           height={500}
           width={500}
           alt="imge"
           className="rounded-lg object-contain hover:scale-105 cursor-pointer transition ease-in-out duration-300 h-[300px] w-[400px] lg:h-[400px] lg:w-[500px] mx-4 md:mx-7"
-        />
-      )}
+          />
+          )}
+          </div>
       <p
-        className="text-wrapper text-xl
+        className="text-wrapper text-slate-300 text-xl
         "
       >
         {film?.desc}

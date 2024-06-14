@@ -44,37 +44,37 @@ function AuthFrom({ session }: Props) {
       <div className=" bg-black flex h-screen flex-row w-screen justify-center items-center  ">
         <form
           onSubmit={login}
-          className="flex flex-col mt-[4%] backdrop-blur-sm bg-black/60   gap-12 items-center shadow-sm rounded-lg shadow-white mx-4 pb-3 "
+          className="flex flex-col mt-24 backdrop-blur-sm box-border px-1 bg-slate-800/70 border border-slate-700 border-solid   gap-12 items-center shadow-sm rounded-lg  mx-4 pb-3 "
         >
           <p>{error && error}</p>
           <input
             type="email"
             placeholder="Email"
             name="email"
-            className="  text-slate-200 h-10 bg-amber-700 rounded-lg shadow-md items-center pl-4 outline-none mx-3"
+            className="  text-slate-200 h-10 bg-slate-700 border-slate-600 border border-solid0 rounded-lg shadow-md items-center pl-4 outline-none mx-3"
           />
           <input
             type="password"
             placeholder="Password"
             name="password"
-            className="  text-slate-200 h-10 bg-amber-700 rounded-lg shadow-md items-center pl-4 outline-none mx-3"
+            className="  text-slate-200 bg-slate-700 h-10 rounded-lg shadow-md border-slate-600 border border-soliditems-center pl-4 outline-none mx-3"
           />
           <div className="flex flex-row gap-2">
             <button
-              className="bg-amber-700 h-10 w-24 rounded-lg shadow-md hover:bg-amber-800 hover:scale-105 transition ease-in duration-300 active:bg-amber-900 text-slate-200"
+              className="rounded-lg shadow-md border-slate-600 border border-solid h-10 w-24  hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-200"
               type="submit"
             >
               Login
             </button>
             <button
-              className="bg-amber-700 h-10 w-24 rounded-lg shadow-md hover:bg-amber-800 hover:scale-105 transition ease-in duration-300 active:bg-amber-900 text-slate-200"
+              className=" border-slate-600 border border-solid h-10 w-24 rounded-lg shadow-md hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-200"
               type="submit"
             >
               <Link href="/login">Register</Link>
             </button>
           </div>
           <button
-            className="bg-amber-700 h-10 w-24 rounded-lg shadow-md hover:bg-amber-800 hover:scale-105 transition ease-in duration-300 active:bg-amber-900 text-slate-200 flex flex-row items-center gap-1 pl-1"
+            className=" border-slate-600 border border-solid h-10 w-24 rounded-lg shadow-md hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-200 flex flex-row items-center gap-1 pl-1"
             onSubmit={githubLogin}
           >
             <FaGithub className=" text-xl " />
@@ -87,7 +87,7 @@ function AuthFrom({ session }: Props) {
     return (
    
       <div className="bg-black items-center justify-center  flex font-sans h-screen w-screen ">
-        <div className="flex flex-col backdrop-blur-sm bg-black/60 shadow-sm shadow-white justify-center items-center mx-10 py-3 md:mx-24 lg:mx-56 xl:mx-64 gap-5 rounded-lg">
+        <div className="flex flex-col mt-24 backdrop-blur-sm box-border px-1 bg-slate-800/70 border border-slate-700 border-solid  justify-center items-center mx-10 py-3 md:mx-24 lg:mx-56 xl:mx-64 gap-5 rounded-lg">
           <Link href="/">
             <Image
               src={logo}
@@ -97,9 +97,9 @@ function AuthFrom({ session }: Props) {
               className=" object-contain  hover:scale-105 transition ease-in duration-500 cursor-pointer h-[290px] w-[390px] rounded-lg "
             />
           </Link>
-          <h1 className=" break-words text-ellipsis whitespace-normal ml-2">
+          <h1 className=" break-words text-ellipsis text-slate-300 whitespace-normal ml-2">
             Are you sure you want to sign out of{" "}
-            <span className="text-amber-500 cursor-pointer">
+            <span className=" text-blue-900 cursor-pointer">
               {" "}
               <Link href="/">Hafid Platform</Link>{" "}
             </span>{" "}
@@ -110,7 +110,7 @@ function AuthFrom({ session }: Props) {
 
           <button
             onClick={logout}
-            className="bg-amber-700 h-10 w-24 rounded-lg shadow-md hover:bg-amber-800 hover:scale-105 transition ease-in duration-300 active:bg-amber-900 text-slate-200"
+            className="  border-slate-600 border border-solid h-10 w-24 rounded-lg shadow-md hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-200"
             type="submit"
           >
             Sign out

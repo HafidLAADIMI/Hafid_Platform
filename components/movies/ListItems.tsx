@@ -35,7 +35,7 @@ function ListItems({ list }: ListItemsProps) {
   };
 
   return (
-    <div className="relative ml-0 mr-2 pr-3 w-[96vw] items-center justify-center mb-[5vh] mt-[5vh] ">
+    <div className="relative backdrop-blur-sm box-border px-1 bg-slate-800/70 border border-slate-700 border-solid  ml-0 mr-2  w-[96vw] items-center justify-center mb-[5vh] mt-[5vh]   ">
       <div className="flex relative flex-row ml-5 mr-5 gap-4 pl-2 pr-2 h-32 w-[230vw] transition ease-out duration-150 overflow-hidden ">
         {items.map((item, idx) => (
           <Items key={idx} items={item} index={index} />

@@ -78,14 +78,14 @@ function Page() {
     >
       <form
         onSubmit={registerUser}
-        className="flex flex-col mt-[4%] backdrop-blur-sm bg-black/60 gap-12  items-center shadow-sm rounded-lg shadow-white p-4  "
+        className="flex flex-col mt-24 backdrop-blur-sm box-border px-1 bg-slate-800/70 border border-slate-700 border-solid  gap-12  items-center shadow-sm rounded-lg  p-4  "
         >
         <p>{error && error}</p>
-        <input type="email" placeholder="Email" required className="  text-slate-200 flex h-10 mx-1 pl-3 bg-amber-700 rounded-lg shadow-md items-center outline-none  " />
+        <input type="email" placeholder="Email" required className="  text-slate-200 flex h-10 mx-1 pl-3 bg-slate-700 border border-solid border-slate-600 rounded-lg shadow-md items-center outline-none  " />
         <input type="password" placeholder="password" required className=" text-slate-200
-         h-10 bg-amber-700 pl-3 rounded-lg shadow-md items-center mx-1 outline-none " />
-        <button type="submit" className=" bg-amber-700 h-10 w-24 rounded-lg shadow-md hover:bg-amber-800 hover:scale-105 transition ease-in duration-300 active:bg-amber-900 text-slate-200">Register</button>
-        <button className="bg-amber-700 h-10 w-24 rounded-lg shadow-md hover:bg-amber-800 hover:scale-105 transition ease-in duration-300 active:bg-amber-900 text-slate-200"><Link href="/login">Back</Link></button>
+         h-10 bg-slate-700 pl-3 rounded-lg shadow-md border-slate-600 border border-solid items-center mx-1 outline-none " />
+        <button type="submit" className=" bg-slate-700 border border-solid border-slate-600 h-10 w-24 rounded-lg shadow-md hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-200">Register</button>
+        <button className="bg-slate-700 h-10 w-24 border-slate-600 border border-solid rounded-lg shadow-md hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-200"><Link href="/">Back</Link></button>
       </form>
     </div>
   );

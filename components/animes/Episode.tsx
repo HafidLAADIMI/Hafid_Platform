@@ -12,9 +12,9 @@ interface EpisodeItem {
   img: string;
 }
 function Episode({ item, img }: EpisodeItem) {
-  console.log(item)
+
   return (
-    <div className=" backdrop-blur-sm bg-black shadow-sm shadow-white  flex flex-col gap-2 p-3 h-[220px] w-[150px] md:h-[320px] md:w-[200px] items-center justify-center">
+    <div className=" backdrop-blur-sm box-border px-1 bg-slate-800/70 border border-slate-700 border-solid flex flex-col gap-2 p-3 h-[220px] w-[150px] md:h-[320px] md:w-[200px] items-center justify-center">
       <Image
         height={800}
         width={800}

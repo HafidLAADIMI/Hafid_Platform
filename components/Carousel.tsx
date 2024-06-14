@@ -24,7 +24,7 @@ function Carousel({ slides }:SlideProps) {
     }
     timeRef.current = setTimeout(() => {
       next();
-    }, 1000);
+    }, 2000);
     return () => {timeRef.current && clearTimeout(timeRef.current);}
   }, [next]);
 
@@ -35,7 +35,7 @@ function Carousel({ slides }:SlideProps) {
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
         {slides.map((img,i) => (
-          <Image height={500} width={500} key={i} alt="img" src={img} className="rounded-lg hover:rounded-lg hover:scale-105 transition ease-in-out duration-150 cursor-pointer object-contain" />
+          <Image height={700} width={700} key={i} alt="img" src={img} className="rounded-lg hover:rounded-lg hover:scale-105 transition ease-in-out duration-150 cursor-pointer object-contain" />
         ))}
       </div>
         <div className=" bottom-0 absolute z-1 flex justify-center flex-row gap-3  right-0 left-0">

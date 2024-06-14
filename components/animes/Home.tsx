@@ -5,6 +5,7 @@ import React from "react";
 import CardAnime from "../CardAnime";
 import axios from "axios";
 import { useSearchAnimeContext } from "@/searchAnimeContext";
+import { FaSearch } from "react-icons/fa";
 interface AnimeItem {
   mal_id: number;
   title: string;
@@ -19,7 +20,7 @@ function Home() {
   const [season, setSeason] = useState<AnimeItem[]>([])
   const [top, setTop] = useState<AnimeItem[]>([]);
   const [upcoming, setUpcoming] = useState<AnimeItem[]>([]);
-  const {searchAnime}=useSearchAnimeContext();
+  const {searchAnime ,setSearchAnime}=useSearchAnimeContext();
 
 
   useEffect(() => {
@@ -105,6 +106,14 @@ function Home() {
 
   return (
     <div className="flex flex-col justify-center items-center mt-8 gap-2 md:mt-[14%] xl:mt-[10%] w-screen">
+         <div className="flex items-center flex-row gap-1.5">
+            <input
+              className="outline-none border-2 transition ease-in-out duration-150 hover:scale-105 text-black border-black rounded-lg pl-2 p-1"
+              placeholder="search"
+              onChange={(e) => setSearchAnime(e.target.value)}
+            />
+            <FaSearch className={`cursor-pointer hover:scale-105 size-6 text-slate-300 `} />
+          </div>
       <h1>Seasons Now</h1>
       <div className="grid w-screen grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 place-items-center gap-2">
         {season.map((item) => (
