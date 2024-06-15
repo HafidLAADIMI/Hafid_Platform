@@ -9,30 +9,33 @@ import Image from "next/image";
 function Navbar() {
   const logo = "/logo.svg";
   const [isClicked, setIsClicked] = useState(false);
-
+  const closeNavbar=()=>setIsClicked(false)
   return (
     <>
       <div
         style={{
           transform: isClicked ? "translateX(0)" : "translateX(100%)",
         }}
-        className={`backdrop-blur-sm box-border bg-slate-400/70 border border-slate-700 border-solid flex justify-between w-screen h-20 items-center shadow-lg fixed mt-20 p-4 pr-9 pl-9 z-50 transition-transform ease-in duration-500 max-sm:flex-col sm:flex-col max-sm:h-[50vh] max-sm:gap-5 max-sm:items-start sm:h-[50vh] sm:gap-5 sm:items-start md:hidden `}
+        className={`backdrop-blur-sm box-border bg-slate-400/70 border border-slate-700 border-solid flex justify-between w-screen h-auto items-center shadow-lg fixed  top-20 p-4 pr-9 pl-9 z-50 transition-transform ease-in duration-500 max-sm:flex-col sm:flex-col max-sm:h-[50vh] max-sm:gap-5 max-sm:items-start sm:h-[50vh] sm:gap-5 sm:items-start md:hidden `}
       >
         <Link
           className=" transition ease-in duration-200 border border-solid border-slate-700   text-black shadow-black shadow-sm hover:bg-white hover:text-black hover:scale-105"
           href="/movies"
+          onClick={closeNavbar}
         >
           Movies
         </Link>
         <Link
           className="transition ease-in duration-200  border border-solid border-slate-700 text-black    shadow-black shadow-sm hover:bg-white hover:text-black hover:scale-105"
-          href="/bookd"
+          href="/books"
+          onClick={closeNavbar}
         >
           Books
         </Link>
         <Link
           className=" transition ease-in duration-200  border border-solid border-slate-700 text-black  shadow-black shadow-sm hover:bg-white hover:text-black hover:scale-105"
           href="/animes"
+          onClick={closeNavbar}
         >
           Animes
         </Link>
@@ -43,6 +46,7 @@ function Navbar() {
         <Link
           className=" items-center justify-center border border-solid border-slate-700 transition ease-in duration-200  text-slate-300 shadow-black shadow-md hover:bg-white hover:text-black hover:scale-105 flex md:hidden h-9 w-14 active:bg-slate-700  "
           href="/auth"
+          onClick={closeNavbar}
         >
           Login
         </Link>
@@ -53,6 +57,7 @@ function Navbar() {
             src={logo}
             alt="mess"
             className=" h-[60px] w-[100px] object-contain   md:w-[8vw] bg-slate-300 text-slate-300 md:object-contain cursor-pointer hover:scale-105 transition ease-in-out duration-500 rounded-full "
+            onClick={closeNavbar}
           />
         </Link>
         <div className=" z-20 md:hidden ">
@@ -90,6 +95,7 @@ function Navbar() {
         <Link
           className=" items-center justify-center border border-solid border-slate-700  transition ease-in duration-200  text-slate-300 shadow-black shadow-md hover:bg-white hover:text-black hover:scale-105 hidden md:flex h-9 w-14  "
           href="/auth"
+  
         >
           Login
         </Link>

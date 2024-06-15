@@ -5,12 +5,12 @@ import { signIn, signOut } from "next-auth/react";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
+import { FaGoogle } from "react-icons/fa6";
 interface Props {
   session: Session | null;
 }
 function AuthFrom({ session }: Props) {
   const logo = "/mylogo.png";
-  const bg = "/bgGold2.jpg";
   const [error, setError] = useState("");
 
   //  verify if the email is valid
@@ -24,9 +24,8 @@ function AuthFrom({ session }: Props) {
     const formData = new FormData(e.target);
     const email = formData.get("email");
     const password = formData.get("password");
-    console.log(email, password);
     try {
-      await signIn("credentials", { email, password, callbackUrl: "/movies" });
+      await signIn("credentials", { email, password, redirectTo: "/movies" });
     } catch (error: any) {
       const errorMessage = error.message || "An error occurred";
       setError(errorMessage);
@@ -36,7 +35,10 @@ function AuthFrom({ session }: Props) {
     await signOut();
   };
   const githubLogin = async () => {
-    await signIn("github", { callbackUrl: "/movies" });
+    await signIn("github", { redirectTo: "/movies" });
+  };
+  const googleLogin = async () => {
+    await signIn("google", { redirectTo: "/movies" });
   };
 
   if (!session) {
@@ -73,19 +75,33 @@ function AuthFrom({ session }: Props) {
               <Link href="/login">Register</Link>
             </button>
           </div>
-          <button
-            className=" border-slate-600 border border-solid h-10 w-24 rounded-lg shadow-md hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-200 flex flex-row items-center gap-1 pl-1"
-            onSubmit={githubLogin}
-          >
-            <FaGithub className=" text-xl " />
-            GitHub
-          </button>
+          <div className="flex flex-row gap-2">
+            <button
+              className=" border-slate-600 border border-solid h-10 w-24 rounded-lg shadow-md hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-200 flex flex-row items-center gap-1 pl-1"
+              onClick={githubLogin}
+                name="action"
+                type="button"
+              value="github"
+            >
+              <FaGithub className=" text-xl " />
+              GitHub
+            </button>
+            <button
+              className=" border-slate-600 border border-solid h-10 w-24 rounded-lg shadow-md hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-200 flex flex-row items-center gap-1 pl-1"
+              onClick={googleLogin}
+              name="action"
+              type="button"
+              value="google"
+            >
+              <FaGoogle className=" text-xl " />
+              Google
+            </button>
+          </div>
         </form>
       </div>
     );
   } else
     return (
-   
       <div className="bg-black items-center justify-center  flex font-sans h-screen w-screen ">
         <div className="flex flex-col mt-24 backdrop-blur-sm box-border px-1 bg-slate-800/70 border border-slate-700 border-solid  justify-center items-center mx-10 py-3 md:mx-24 lg:mx-56 xl:mx-64 gap-5 rounded-lg">
           <Link href="/">
@@ -108,13 +124,22 @@ function AuthFrom({ session }: Props) {
             personalized recommendations and watchlist. See you again soon!
           </h1>
 
-          <button
-            onClick={logout}
-            className="  border-slate-600 border border-solid h-10 w-24 rounded-lg shadow-md hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-200"
-            type="submit"
-          >
-            Sign out
-          </button>
+          <div className="flex flex-row gap-2">
+            <button
+              onClick={logout}
+              className="  border-slate-600 border border-solid h-10 w-24 rounded-lg shadow-md hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-200"
+              type="submit"
+            >
+              Sign out
+            </button>
+
+            <button
+              className="  border-slate-600 border border-solid h-10 w-24 rounded-lg shadow-md hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-200"
+              type="submit"
+            >
+              <Link href="/">Home</Link>
+            </button>
+          </div>
         </div>
       </div>
     );

@@ -1,6 +1,6 @@
 import userSchema from "../../../Backend/models/User";
 import connectDb from "../../../Backend/models/db";
-import bcrypt from 'bcryptjs'
+import bcrypt from "bcryptjs"
 import { NextResponse } from "next/server";
 
 

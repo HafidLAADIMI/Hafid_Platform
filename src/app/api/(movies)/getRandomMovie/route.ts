@@ -1,8 +1,6 @@
 import Movies from "@/app/Backend/models/Movies";
 import { NextResponse } from "next/server";
-import { auth } from "../../../../../auth";
 import connectDb from "@/app/Backend/models/db";
-
 export const GET = async (request: Request) => {
   let movie;
   try {

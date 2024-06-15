@@ -2,6 +2,7 @@ import type { NextAuthConfig } from "next-auth";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
 import userSchema from "./src/app/Backend/models/User";
 import connectDb from "@/app/Backend/models/db";
 import bcrypt from "bcryptjs";
@@ -44,12 +45,16 @@ const credentialsConfig = CredentialsProvider({
     }
   },
 });
+
 pages: {
   signIn: "/auth";
   signOut: "/auth";
 }
+session: {
+  strategy: "jwt"
+}
 const config = {
-  providers: [credentialsConfig, GitHub],
+  providers: [credentialsConfig, GitHub,Google],
 } satisfies NextAuthConfig;
 
 export const { handlers, auth, signIn, signOut } = NextAuth(config);

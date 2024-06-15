@@ -105,7 +105,7 @@ function Home() {
   
 
   return (
-    <div className="flex flex-col justify-center items-center mt-8 gap-2 md:mt-[14%] xl:mt-[10%] w-screen">
+    <div className="flex flex-col justify-center items-center mt-24 gap-2 md:mt-[14%] xl:mt-[10%] w-screen">
          <div className="flex items-center flex-row gap-1.5">
             <input
               className="outline-none border-2 transition ease-in-out duration-150 hover:scale-105 text-black border-black rounded-lg pl-2 p-1"

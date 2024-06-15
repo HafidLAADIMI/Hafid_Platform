@@ -16,7 +16,7 @@ function Page() {
   const { type } = useTypeContext();
   const [lists, setLists] = useState([]);
   const [genre, setGenre] = useState(null);
-  const [error, setError] = useState<any>();
+  const [error, setError] = useState<string>();
   const apiUrl = process.env.AUTH_URL;
   // fetching random list from the APIs
   useEffect(() => {
@@ -35,11 +35,11 @@ function Page() {
         }
       } catch (error: any) {
         console.error(error);
-        setError(error);
+        setError(error.message);
       }
     };
     fetchRandomList();
-  }, [genre, type,apiUrl]);
+  }, [genre, type, apiUrl]);
 
   const logo = "/mylogo.png";
 
@@ -92,8 +92,8 @@ function Page() {
             already a member, or sign up to start your cinematic adventure with
             Hafid Platform today!
           </p>
+          <p className="text-red-600">{error}</p>
           <div className="flex flex-row gap-2">
-            <p>{error}</p>
             <button
               className="bg-slate-700 h-10 w-24 border-slate-600 border border-solid rounded-lg  hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-300"
               type="submit"
