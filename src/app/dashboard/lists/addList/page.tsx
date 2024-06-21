@@ -4,6 +4,7 @@ import React, { FormEvent, useState } from "react";
 import axios from "axios";
 
 function ListPage() {
+  const apiUrl = process.env.AUTH_URL;
   const [listTitle, setListTitle] = useState<string>("");
   const [listType, setListType] = useState<string>("");
   const [listGenre, setListGenre] = useState<string>("");
@@ -83,7 +84,7 @@ function ListPage() {
       content: movies,
     };
     try {
-      await axios.post("/api/addList", newList, {
+      await axios.post(`${apiUrl}/api/addList`, newList, {
         headers: {
           "Content-Type": "application/json",
         },

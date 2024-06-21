@@ -4,8 +4,9 @@ import { useState, useMemo, FormEvent } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
 function Page() {
-  const params=useParams();
-  const oldEmail= decodeURIComponent(params.email as string);
+  const apiUrl = process.env.AUTH_URL;
+  const params = useParams();
+  const oldEmail = decodeURIComponent(params.email as string);
   console.log(oldEmail);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -30,23 +31,23 @@ function Page() {
     }),
     [email, image, password, isAdmin]
   );
-  const clearUserForm=()=>{
+  const clearUserForm = () => {
     setEmail("");
     setPassword("");
     setImage("");
     setIsAdmin(false);
     setMessage("");
-  }
+  };
   const updateUser = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
-      await axios.put("/api/updateUser",{oldEmail,newUser});
+      await axios.put(`${apiUrl}/api/updateUser`, { oldEmail, newUser });
       console.log("user added");
       setMessage("you have successfuly added the user");
       clearUserForm();
     } catch (error: any) {
-      setMessage("there was an error in adding the user")
+      setMessage("there was an error in adding the user");
     }
   };
 

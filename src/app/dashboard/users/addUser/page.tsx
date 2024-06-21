@@ -3,6 +3,7 @@
 import { useState, useMemo, FormEvent } from "react";
 import axios from "axios";
 function Page() {
+  const apiUrl = process.env.AUTH_URL;
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [image, setImage] = useState<any>(null);
@@ -37,7 +38,7 @@ function Page() {
     e.preventDefault();
 
     try {
-      await axios.post("/api/addUser", newUser, {
+      await axios.post(`${apiUrl}/api/addUser`, newUser, {
         headers: {
           "Content-Type": "application/json",
         },

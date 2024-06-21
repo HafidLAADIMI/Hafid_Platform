@@ -2,10 +2,11 @@
 
 import React, { FormEvent, useState } from "react";
 import axios from "axios";
-import { usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 function ListPage() {
-  const params = usePathname();
+  const params = useParams();
   const oldTitle = decodeURIComponent(params.title as string);
+  const apiUrl = process.env.AUTH_URL;
   const [listTitle, setListTitle] = useState<string>("");
   const [listType, setListType] = useState<string>("");
   const [listGenre, setListGenre] = useState<string>("");
@@ -85,7 +86,7 @@ function ListPage() {
       content: movies,
     };
     try {
-      await axios.put("/api/updateList", { oldTitle, newList });
+      await axios.put(`${apiUrl}/api/updateList`, { oldTitle, newList });
       console.log("List added");
       setMessage("You have successfully updated the list");
       clearListForm();

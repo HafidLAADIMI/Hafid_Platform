@@ -8,18 +8,19 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 interface List{
   title:string,
+  id:string,
   content:[],
   genre:string,
   createdAt:string,
 }
 function Page() {
+  const apiUrl = process.env.AUTH_URL;
   const router=useRouter();
-  const img = "/naruto.jpg";
   const [lists, setLists] = useState<List[]>([]);
   useEffect(() => {
     const getLists = async () => {
       try {
-        const response = await axios.get("/api/getAllLists");
+        const response = await axios.get(`${apiUrl}/api/getAllLists`);
         console.log(response.data.list);
         setLists(response.data.list);
       } catch (error: any) {
@@ -27,10 +28,10 @@ function Page() {
       }
     };
     getLists();
-  }, []);
+  }, [apiUrl]);
   const deleteSerie=async(title:string)=>{
     try{
-      await axios.delete('/api/deleteList',{data:{title}})
+      await axios.delete(`${apiUrl}/api/deleteList`,{data:{title}})
     }
     catch(error:any){
       console.log(error)

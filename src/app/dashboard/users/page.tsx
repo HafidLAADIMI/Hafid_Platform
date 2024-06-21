@@ -7,21 +7,22 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-interface User{
-  email:string,
-  image:string,
-  id:string,
-  createdAt:string,
-  isAdmin:boolean
+interface User {
+  email: string;
+  image: string;
+  id: string;
+  createdAt: string;
+  isAdmin: boolean;
 }
 
 function Page() {
-  const router=useRouter();
+  const apiUrl = process.env.AUTH_URL;
+  const router = useRouter();
   const [users, setUsers] = useState<User[]>([]);
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const response = await axios.get("/api/getAllUsers");
+        const response = await axios.get(`${apiUrl}/api/getAllUsers`);
         console.log(response.data);
         setUsers(response.data.data);
       } catch (error) {
@@ -29,16 +30,14 @@ function Page() {
       }
     };
     getUsers();
-  }, []);
-  const deleteUser=async(email:string)=>{
-    try{
-      await axios.delete('/api/deleteUser',{data:{email}})
-       
+  }, [apiUrl]);
+  const deleteUser = async (email: string) => {
+    try {
+      await axios.delete(`${apiUrl}/api/deleteUser`, { data: { email } });
+    } catch (error) {
+      console.log(error);
     }
-    catch(error){
-      console.log(error)
-    }
-  }
+  };
   const img = "/noavatar.jpg";
   return (
     <div className="flex flex-col gap-2 mt-24 md:ml-[22vw] text-slate-300 p-4">
@@ -87,17 +86,17 @@ function Page() {
                       className="h-10 w-10 object-cover rounded-full"
                     />
                   </div>
-                ):
-                <div className="flex items-center gap-3">
-                <Image
-                  height={300}
-                  width={300}
-                  alt="img"
-                  src={img}
-                  className="h-10 w-10 object-cover rounded-full"
-                />
-              </div>
-                }
+                ) : (
+                  <div className="flex items-center gap-3">
+                    <Image
+                      height={300}
+                      width={300}
+                      alt="img"
+                      src={img}
+                      className="h-10 w-10 object-cover rounded-full"
+                    />
+                  </div>
+                )}
               </td>
               <td className="border border-solid border-slate-700 px-4 py-2">
                 {user.email}
@@ -117,10 +116,18 @@ function Page() {
 
               <td>
                 <div className=" flex pl-5 flex-row gap-2">
-                  <button onClick={()=>router.push(`/dashboard/users/${user.email}`)} className="h-10 w-16 rounded cursor-pointer bg-green-600">
+                  <button
+                    onClick={() =>
+                      router.push(`/dashboard/users/${user.email}`)
+                    }
+                    className="h-10 w-16 rounded cursor-pointer bg-green-600"
+                  >
                     Update
                   </button>
-                  <button onClick={()=>deleteUser(user.email)} className="h-10 w-16 rounded cursor-pointer bg-red-600">
+                  <button
+                    onClick={() => deleteUser(user.email)}
+                    className="h-10 w-16 rounded cursor-pointer bg-red-600"
+                  >
                     Delete
                   </button>
                 </div>

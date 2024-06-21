@@ -3,6 +3,7 @@ import React, { FormEvent, useMemo } from "react";
 import axios from "axios";
 import { useState } from "react";
 function Page() {
+  const apiUrl = process.env.AUTH_URL;
   const [image, setImage] = useState<any>();
   const [video, setVideo] = useState<any>();
   const [trailer, setTrailer] = useState<any>();
@@ -41,17 +42,19 @@ function Page() {
     reader.readAsDataURL(file);
   };
   const clearMovieForm = () => {
-    setMovieTitle("");
-    setMovieDescription("");
-    setMovieImage(null);
-    setMovieTrailer(null);
-    setMovieVideo(null);
-    setMovieYear(2003);
-    setMovieLimit(2020);
-    setMovieGenre("");
-    setMovieIsSeries(false);
+    setImage(null);
+    setVideo(null);
+    setTrailer(null);
+    setTitle("");
+    setDescription("");
+    setImageTitle("");
+    setImageSmall("");
+    setYear(0);
+    setLimit(0);
+    setGenre("");
+    setIsSerie(false);
+    setMessage("");
   };
-
 
   const newMovie = useMemo(
     () => ({
@@ -86,12 +89,12 @@ function Page() {
     e.preventDefault();
 
     try {
-      await axios.post("/api/addMovie", newMovie, {
+      await axios.post(`${apiUrl}/api/addMovie`, newMovie, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      console.log("movie added");
+
       setMessage("you have successfuly added the movie");
       clearMovieForm();
     } catch (error: any) {

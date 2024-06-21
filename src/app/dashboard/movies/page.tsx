@@ -1,44 +1,40 @@
 "use client";
 import React from "react";
 import Search from "../../../../components/dashboard/Search";
-import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-interface Movie{
-  title:string,
-  desc:string,
-  genre:string,
-  id:string,
-  createdAt:string,
-  isSeries:boolean
+interface Movie {
+  title: string;
+  desc: string;
+  genre: string;
+  id: string;
+  createdAt: string;
+  isSeries: boolean;
 }
-
 function Page() {
-  const router=useRouter()
+  const apiUrl = process.env.AUTH_URL;
+  const router = useRouter();
   const [movies, setMovies] = useState<Movie[]>([]);
   useEffect(() => {
     const getMovies = async () => {
       try {
-        const response = await axios.get("/api/getAllMovies");
+        const response = await axios.get(`${apiUrl}/api/getAllMovies`);
         setMovies(response.data.movie);
       } catch (error: any) {
         console.log(error);
       }
     };
     getMovies();
-  }, []);
-  const deleteMovie=async(title:string)=>{
-    try{
-      await axios.delete('/api/deleteMovie',{data:{title}})
-
+  }, [apiUrl]);
+  const deleteMovie = async (title: string) => {
+    try {
+      await axios.delete(`${apiUrl}/api/deleteMovie`, { data: { title } });
+    } catch (error: any) {
+      console.log(error);
     }
-    catch(error:any){
-      console.log(error)
-    }
-  }
-  const img = "/naruto.jpg";
+  };
   return (
     <div className="flex flex-col gap-2 mt-24 md:ml-[22vw] text-slate-300 p-4">
       <div className="flex flex-row justify-between items-center w-full">
@@ -103,10 +99,18 @@ function Page() {
               )}
               <td>
                 <div className=" flex pl-5 flex-row gap-2">
-                  <button onClick={()=>router.push(`/dashboard/movies/${movie.title}`)} className="h-10 w-16 rounded cursor-pointer bg-green-600">
+                  <button
+                    onClick={() =>
+                      router.push(`/dashboard/movies/${movie.title}`)
+                    }
+                    className="h-10 w-16 rounded cursor-pointer bg-green-600"
+                  >
                     Update
                   </button>
-                  <button onClick={()=>deleteMovie(movie.title)} className="h-10 w-16 rounded cursor-pointer bg-red-600">
+                  <button
+                    onClick={() => deleteMovie(movie.title)}
+                    className="h-10 w-16 rounded cursor-pointer bg-red-600"
+                  >
                     Delete
                   </button>
                 </div>
