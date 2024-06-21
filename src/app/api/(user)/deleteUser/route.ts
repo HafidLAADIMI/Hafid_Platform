@@ -6,14 +6,14 @@ export const DELETE = async (request: Request) => {
   try {
     await connectDb();
     const session = await auth();
-    const { searchParams } = new URL(request.url);
-    const email = searchParams.get("email");
-    if (!session || !email) {
-      return NextResponse.json({
-        message: "you are not authenticated",
-        status: 401,
-      });
-    }
+    const { email } = await request.json();
+   
+    // if (!session || !email) {
+    //   return NextResponse.json({
+    //     message: "you are not authenticated",
+    //     status: 401,
+    //   });
+    // }
     await User.findOneAndDelete({ email: email });
     return NextResponse.json({
       message: "the user was successfuly deleted",

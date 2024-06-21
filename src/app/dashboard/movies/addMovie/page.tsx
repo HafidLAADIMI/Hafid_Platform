@@ -1,0 +1,247 @@
+"use client";
+import React, { FormEvent, useMemo } from "react";
+import axios from "axios";
+import { useState } from "react";
+function Page() {
+  const [image, setImage] = useState<any>();
+  const [video, setVideo] = useState<any>();
+  const [trailer, setTrailer] = useState<any>();
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [imageTitle, setImageTitle] = useState<string>("");
+  const [imageSmall, setImageSmall] = useState<string>("");
+  const [year, setYear] = useState<number>(2003);
+  const [limit, setLimit] = useState<number>(2020);
+  const [genre, setGenre] = useState<string>("");
+  const [isSerie, setIsSerie] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+
+  const handleImage = (e: any) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+  const handleTrailer = (e: any) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setTrailer(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+  const handleVideo = (e: any) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setVideo(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+  const clearMovieForm = () => {
+    setMovieTitle("");
+    setMovieDescription("");
+    setMovieImage(null);
+    setMovieTrailer(null);
+    setMovieVideo(null);
+    setMovieYear(2003);
+    setMovieLimit(2020);
+    setMovieGenre("");
+    setMovieIsSeries(false);
+  };
+
+
+  const newMovie = useMemo(
+    () => ({
+      title: title,
+      desc: description,
+      img: image,
+      imgTitle: imageTitle,
+      imgSm: imageSmall,
+      trailer: trailer,
+      video: video,
+      year: year,
+      limit: limit,
+      genre: genre,
+      isSeries: isSerie,
+    }),
+    [
+      title,
+      description,
+      image,
+      imageTitle,
+      imageSmall,
+      trailer,
+      video,
+      year,
+      limit,
+      genre,
+      isSerie,
+    ]
+  );
+  console.log(newMovie);
+  const addMovie = async (e: FormEvent) => {
+    e.preventDefault();
+
+    try {
+      await axios.post("/api/addMovie", newMovie, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("movie added");
+      setMessage("you have successfuly added the movie");
+      clearMovieForm();
+    } catch (error: any) {
+      console.log(error);
+      setMessage("There was an error adding the movie");
+    }
+  };
+  return (
+    <div className="flex flex-col md:ml-[23vw] rounded w-[75vw] mt-24 items-center gap-7 px-4 backdrop-blur-sm box-border bg-slate-800/70 border border-slate-700 border-solid">
+      <form onSubmit={addMovie} className="flex flex-col gap-7 w-full">
+        <label className="flex flex-col gap-2 items-center">
+          image
+          <input
+            className="flex h-[10vh] outline rounded-lg bg-slate-700 pl-3 pt-5"
+            type="file"
+            name="image"
+            accept="image/*"
+            placeholder="Image"
+            onChange={handleImage}
+          />
+        </label>
+        {/* <label className="flex flex-col items-center gap-2">
+          trailer
+          <input
+            className="flex h-[10vh] outline rounded-lg bg-slate-700 pl-3 pt-5 "
+            type="file"
+            name="trailer"
+            accept="video/*"
+            placeholder="Trailer"
+            onChange={handleTrailer}
+          />
+        </label> */}
+        <input
+          className="flex h-[10vh] outline rounded-lg bg-slate-700 pl-5 "
+          type="text"
+          name="trailer"
+          placeholder="trailer"
+          onChange={(e: any) => {
+            setTrailer(e.target.value);
+          }}
+        />
+
+        {/* <label className="flex flex-col items-center gap-2">
+          video
+          <input
+            className="flex h-[10vh] outline rounded-lg bg-slate-700 pl-3 pt-5 "
+            type="file"
+            name="video"
+            accept="video/*"
+            placeholder="Video"
+            onChange={handleVideo}
+          />
+        </label> */}
+        <input
+          className="flex h-[10vh] outline rounded-lg bg-slate-700 pl-5 "
+          type="text"
+          name="video"
+          placeholder="video"
+          onChange={(e: any) => {
+            setVideo(e.target.value);
+          }}
+        />
+
+        <input
+          className="flex h-[10vh] outline rounded-lg bg-slate-700 pl-5 "
+          type="text"
+          name="title"
+          placeholder="Title"
+          onChange={(e: any) => {
+            setTitle(e.target.value);
+          }}
+        />
+        <input
+          className="flex h-[10vh] outline rounded-lg bg-slate-700 pl-5 "
+          type="text"
+          name="desc"
+          placeholder="Description"
+          onChange={(e: any) => {
+            setDescription(e.target.value);
+          }}
+        />
+        <input
+          className="flex h-[10vh] outline rounded-lg bg-slate-700 pl-5 "
+          type="text"
+          name="imgTitle"
+          placeholder="imgTitle"
+          onChange={(e: any) => {
+            setImageTitle(e.target.value);
+          }}
+        />
+        <input
+          className="flex h-[10vh] outline rounded-lg bg-slate-700 pl-5 "
+          type="text"
+          name="imgSm"
+          placeholder="imgSM"
+          onChange={(e: any) => {
+            setImageSmall(e.target.value);
+          }}
+        />
+
+        <input
+          className="flex h-[10vh] outline rounded-lg bg-slate-700 pl-5 pr-5"
+          type="number"
+          name="Year"
+          placeholder="Year"
+          onChange={(e: any) => {
+            setYear(e.target.value);
+          }}
+        />
+        <input
+          className="flex h-[10vh] outline rounded-lg bg-slate-700 pl-5 pr-5"
+          type="number"
+          name="limit"
+          placeholder="Limit"
+          onChange={(e: any) => {
+            setLimit(e.target.value);
+          }}
+        />
+        <input
+          className="flex h-[10vh] outline rounded-lg bg-slate-700 pl-5 "
+          type="text"
+          name="genre"
+          placeholder="Genre"
+          onChange={(e: any) => {
+            setGenre(e.target.value);
+          }}
+        />
+        <div className="flex flex-row gap-3 items-center justify-center h-[10vh] outline rounded-lg bg-slate-700 pl-5 pr-5 ">
+          <label> Serie </label>
+          <input
+            className="h-5 w-5"
+            type="checkbox"
+            name="serie"
+            placeholder="Serie"
+            onChange={(e: any) => {
+              setIsSerie(e.target.checked);
+            }}
+          />
+        </div>
+
+        <button
+          className="w-full h-12 cursor-pointer rounded-lg bg-blue-800 text-slate-200 mb-4"
+          type="submit"
+        >
+          submit
+        </button>
+        <p className="text-amber-600 my-2">{message}</p>
+      </form>
+    </div>
+  );
+}
+
+export default Page;

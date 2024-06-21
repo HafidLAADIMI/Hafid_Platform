@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const userSchema = new mongoose.Schema(
   {
     email: {
@@ -9,6 +8,14 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       require: true,
+    },
+    image: {
+      type: String,
+      require: false,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true },

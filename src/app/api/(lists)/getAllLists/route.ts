@@ -1,38 +1,32 @@
 import { NextResponse } from "next/server";
-import Movies from "@/app/Backend/models/Movies";
 import { auth } from "../../../../../auth";
+import List from "@/app/Backend/models/List";
 import connectDb from "@/app/Backend/models/db";
-
-export const POST = async (request: Request) => {
+export const GET = async (request: Request) => {
   try {
-    const data= await request.json();
-   
-    console.log(data)
-    // const session = await auth();
     await connectDb();
+    // const session = await auth();
     // if (!session) {
     //   return NextResponse.json({
     //     message: "you are not authenticated",
     //     status: 401,
     //   });
     // }
-    if (!data) {
+    const list = await List.find();
+    if (!list) {
       return NextResponse.json({
-        message: "you should provied informations about the movie",
+        message: "there is no list ",
         status: 404,
       });
     }
-    const movie = new Movies(data);
-    await movie.save();
-
     return NextResponse.json({
-      message: "you are successfuly added the new movie",
+      list,
       status: 200,
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
     return NextResponse.json({
-      message: error.toString(),
+      message: error,
       status: 500,
     });
   }

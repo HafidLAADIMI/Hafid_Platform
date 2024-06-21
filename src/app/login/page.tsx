@@ -70,7 +70,6 @@ function Page() {
       console.log(error);
     }
   };
-  const body = "/bgbody2.avif";
   return (
     <div
   

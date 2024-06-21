@@ -76,7 +76,7 @@ export default function Home() {
               </div>
               <span className="text-amber-600 ">Animes</span>
             </div>
-            <div className="flex flex-col gap-2 max-h-[110px] md:max-h-[160px]  items-center bg-slate-700 border border-solid border-slate-600 ">
+            {/* <div className="flex flex-col gap-2 max-h-[110px] md:max-h-[160px]  items-center bg-slate-700 border border-solid border-slate-600 ">
               <div className="h-[90px] w-[100px] md:h-[140px] md:w-[160px] overflow-hidden ">
                 <Link href="/books">
                   <Image
@@ -89,7 +89,7 @@ export default function Home() {
                 </Link>
               </div>
               <span className="text-amber-600 ">Books</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -128,7 +128,7 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <div className="backdrop-blur-sm box-border bg-slate-800/70 border border-slate-700 border-solid   flex flex-col mt-10 w-[90vw] items-center gap-3 py-4 lg:flex-row md:mx-20 lg:mx-52 lg:px-4 rounded-lg">
+      {/* <div className="backdrop-blur-sm box-border bg-slate-800/70 border border-slate-700 border-solid   flex flex-col mt-10 w-[90vw] items-center gap-3 py-4 lg:flex-row md:mx-20 lg:mx-52 lg:px-4 rounded-lg">
         <div className="flex justify-center max-w-[390px] items-center mx-4">
           <Carousel slides={slides} />
         </div>
@@ -143,7 +143,7 @@ export default function Home() {
             <Link href="/books">See more </Link>
           </button>
         </div>
-      </div>
+      </div> */}
 
       <Footer />
     </div>

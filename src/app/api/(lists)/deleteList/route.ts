@@ -6,8 +6,8 @@ export const DELETE = async (request: Request) => {
   try {
     await connectDb();
     const session = await auth();
-    const {searchParams}=new URL(request.url)
-    const title  = searchParams.get('title');
+    const {title}=await request.json();
+   
     // if (!session) {
     //   return NextResponse.json({
     //     message: "you are not authenticated",

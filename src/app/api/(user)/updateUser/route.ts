@@ -7,39 +7,28 @@ export const PUT = async (request: Request) => {
   try {
     await connectDb();
     const session = await auth();
-    const { searchParams } = new URL(request.url);
-    const email = searchParams.get("email");
-    const newEmail = searchParams.get("newEmail");
-    const newPassword = searchParams.get("newPassword");
+    const { oldEmail, newUser } = await request.json();
 
-    if (!session || !email) {
+    if (!oldEmail || !newUser) {
       return NextResponse.json({
         message: "you are not authenticated",
         status: 401,
       });
     }
-    if (!newPassword && !newEmail) {
+    if (!newUser) {
       return NextResponse.json({
         message: "you should provied an email and a password",
         status: 400,
       });
     }
-    const newData: { email?: string; password?: string } = {};
-    if (newEmail) {
-      newData.email = newEmail;
+
+    if (newUser.password) {
+      newUser.password = await bcrypt.hash(newUser.password, 10);
     }
-    if (newPassword) {
-      newData.password = await bcrypt.hash(newPassword, 10);
-    }
-    const newUser = await User.findOneAndUpdate({ email: email }, newData, {
+    await User.findOneAndUpdate({ email: oldEmail }, newUser, {
       new: true,
     });
-    if (!newUser) {
-      return NextResponse.json({
-        message: "user not found",
-        status: 404,
-      });
-    }
+
     return NextResponse.json({
       message: "the data was successfuly updated",
       status: 200,

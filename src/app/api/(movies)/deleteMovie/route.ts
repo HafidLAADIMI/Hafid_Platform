@@ -4,15 +4,15 @@ import { auth } from "../../../../../auth";
 import Movies from "@/app/Backend/models/Movies";
 export const DELETE = async (request: Request) => {
   try {
-    const {searchParams} = new URL (request.url);
-    const title=searchParams.get('title');
-    const session = await auth();
-    if (!session) {
-      return NextResponse.json({
-        message: "you are not authenticated",
-        status: 401,
-      });
-    }
+    const {title} = await request.json();
+  
+    // const session = await auth();
+    // if (!session) {
+    //   return NextResponse.json({
+    //     message: "you are not authenticated",
+    //     status: 401,
+    //   });
+    // }
     if (!title) {
       return NextResponse.json({
         message: "you should provide the title of the movie",

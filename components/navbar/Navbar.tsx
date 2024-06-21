@@ -16,7 +16,7 @@ function Navbar() {
         style={{
           transform: isClicked ? "translateX(0)" : "translateX(100%)",
         }}
-        className={`backdrop-blur-sm box-border bg-slate-400/70 border border-slate-700 border-solid flex justify-between w-screen h-auto items-center shadow-lg fixed  top-20 p-4 pr-9 pl-9 z-50 transition-transform ease-in duration-500 max-sm:flex-col sm:flex-col max-sm:h-[50vh] max-sm:gap-5 max-sm:items-start sm:h-[50vh] sm:gap-5 sm:items-start md:hidden `}
+        className={`backdrop-blur-sm box-border bg-slate-400/70 border border-slate-700 border-solid flex justify-between w-screen h-auto items-center shadow-lg fixed  top-20 p-4 pr-9 pl-9 z-50 transition-transform ease-in duration-300 max-sm:flex-col sm:flex-col max-sm:h-[50vh] max-sm:gap-5 max-sm:items-start sm:h-[50vh] sm:gap-5 sm:items-start md:hidden `}
       >
         <Link
           className=" transition ease-in duration-200 border border-solid border-slate-700   text-black shadow-black shadow-sm hover:bg-white hover:text-black hover:scale-105"
@@ -27,10 +27,10 @@ function Navbar() {
         </Link>
         <Link
           className="transition ease-in duration-200  border border-solid border-slate-700 text-black    shadow-black shadow-sm hover:bg-white hover:text-black hover:scale-105"
-          href="/books"
+          href="/dashboard"
           onClick={closeNavbar}
         >
-          Books
+          Dashboard
         </Link>
         <Link
           className=" transition ease-in duration-200  border border-solid border-slate-700 text-black  shadow-black shadow-sm hover:bg-white hover:text-black hover:scale-105"
@@ -82,9 +82,9 @@ function Navbar() {
         </Link>
         <Link
           className="tex rounded transition ease-in duration-200 bg-black text-slate-300 shadow-black shadow-md hover:bg-white hover:text-black hover:scale-105 hidden md:flex "
-          href="/register"
+          href="/dashboard"
         >
-          Books
+          Dashboard
         </Link>
         <Link
           className="tex rounded transition ease-in duration-200 bg-black text-slate-300 shadow-black shadow-md hover:bg-white hover:text-black hover:scale-105 hidden md:flex "

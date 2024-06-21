@@ -6,6 +6,7 @@ import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 import { FaGoogle } from "react-icons/fa6";
+
 interface Props {
   session: Session | null;
 }

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import Movies from "@/app/Backend/models/Movies";
+import List from "@/app/Backend/models/List";
 import { auth } from "../../../../../auth";
 import connectDb from "@/app/Backend/models/db";
 
@@ -7,7 +7,7 @@ export const PUT = async (request: Request) => {
   try {
     await connectDb();
 
-    const { oldTitle,newMovie } = await request.json();
+    const { oldTitle,newList } = await request.json();
   
 
     const session = await auth();
@@ -18,16 +18,16 @@ export const PUT = async (request: Request) => {
     //   });
     // }
 
-    if (!oldTitle || !newMovie) {
+    if (!oldTitle || !newList) {
       return NextResponse.json({
         message: "you should provide a data and a the title of the movie",
         status: 403,
       });
     }
-    const movie = await Movies.findOneAndUpdate({ title: oldTitle }, newMovie, {
+    const list = await List.findOneAndUpdate({ title: oldTitle }, newList, {
       new: true,
     });
-    if (!movie) {
+    if (!list) {
       return NextResponse.json({
         message: "there is no movie with this title",
         status: 404,
