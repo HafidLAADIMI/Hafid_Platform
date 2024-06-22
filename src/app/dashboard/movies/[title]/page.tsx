@@ -4,7 +4,6 @@ import axios from "axios";
 import { useState } from "react";
 import { useParams } from "next/navigation";
 function Page() {
-  const apiUrl = process.env.AUTH_URL;
   const params = useParams();
   const oldTitle = decodeURIComponent(params.title as string);
   const [image, setImage] = useState<any>();
@@ -92,7 +91,7 @@ function Page() {
     e.preventDefault();
 
     try {
-      await axios.put(`${apiUrl}/api/updateMovie`, { oldTitle, newMovie });
+      await axios.put(`/api/updateMovie`, { oldTitle, newMovie });
       console.log("movie added");
       setMessage("you have successfuly updated the movie");
       clearMovieForm();

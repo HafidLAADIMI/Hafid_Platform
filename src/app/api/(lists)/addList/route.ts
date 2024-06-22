@@ -7,13 +7,12 @@ export const POST = async (request: Request) => {
     await connectDb();
     const session = await auth();
     const data = await request.json();
-    console.log(data);
-    // if (!session) {
-    //   return NextResponse.json({
-    //     message: "you are not authenticated",
-    //     status: 401,
-    //   });
-    // }
+    if (!session) {
+      return NextResponse.json({
+        message: "you are not authenticated",
+        status: 401,
+      });
+    }
     if (!data) {
       return NextResponse.json({
         message: "you should provide a data",

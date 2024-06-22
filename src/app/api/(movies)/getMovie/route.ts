@@ -4,9 +4,9 @@ import { auth } from "../../../../../auth";
 import Movies from "@/app/Backend/models/Movies";
 export const GET = async (request: Request) => {
   try {
+    await connectDb();
     const { searchParams } = new URL(request.url);
     const title = searchParams.get("title");
-
     const session = await auth();
     if (!session) {
       return NextResponse.json({

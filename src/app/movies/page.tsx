@@ -17,29 +17,18 @@ function Page() {
   const [lists, setLists] = useState([]);
   const [genre, setGenre] = useState(null);
   const [error, setError] = useState<string>();
-  const apiUrl = process.env.AUTH_URL;
   // fetching random list from the APIs
   useEffect(() => {
-    const fetchRandomList = async () => {
+    const getLists = async () => {
       try {
-        const response = await axios.get(
-          `${apiUrl}/api/getList${type ? "?type=" + type : ""}${
-            genre ? "&genre=" + genre : ""
-          }`
-        );
-        if (response) {
-          setLists(response.data.list);
-          console.log(response.data.list);
-        } else {
-          setError("there is no response");
-        }
+        const response = await axios.get(`/api/getAllLists`);
+        setLists(response.data.list);
       } catch (error: any) {
-        console.error(error);
-        setError(error.message);
+        console.log(error);
       }
     };
-    fetchRandomList();
-  }, [genre, type, apiUrl]);
+    getLists();
+  }, []);
 
   const logo = "/mylogo.png";
 

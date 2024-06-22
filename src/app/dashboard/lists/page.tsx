@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Search from "../../../../components/dashboard/Search";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -14,24 +13,22 @@ interface List{
   createdAt:string,
 }
 function Page() {
-  const apiUrl = process.env.AUTH_URL;
   const router=useRouter();
   const [lists, setLists] = useState<List[]>([]);
   useEffect(() => {
     const getLists = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/api/getAllLists`);
-        console.log(response.data.list);
+        const response = await axios.get(`/api/getAllLists`);
         setLists(response.data.list);
       } catch (error: any) {
         console.log(error);
       }
     };
     getLists();
-  }, [apiUrl]);
+  }, []);
   const deleteSerie=async(title:string)=>{
     try{
-      await axios.delete(`${apiUrl}/api/deleteList`,{data:{title}})
+      await axios.delete(`/api/deleteList`,{data:{title}})
     }
     catch(error:any){
       console.log(error)

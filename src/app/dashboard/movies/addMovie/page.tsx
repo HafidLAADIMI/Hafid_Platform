@@ -3,7 +3,6 @@ import React, { FormEvent, useMemo } from "react";
 import axios from "axios";
 import { useState } from "react";
 function Page() {
-  const apiUrl = process.env.AUTH_URL;
   const [image, setImage] = useState<any>();
   const [video, setVideo] = useState<any>();
   const [trailer, setTrailer] = useState<any>();
@@ -89,7 +88,7 @@ function Page() {
     e.preventDefault();
 
     try {
-      await axios.post(`${apiUrl}/api/addMovie`, newMovie, {
+      await axios.post(`/api/addMovie`, newMovie, {
         headers: {
           "Content-Type": "application/json",
         },

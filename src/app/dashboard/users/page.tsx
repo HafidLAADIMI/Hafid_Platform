@@ -16,24 +16,22 @@ interface User {
 }
 
 function Page() {
-  const apiUrl = process.env.AUTH_URL;
   const router = useRouter();
   const [users, setUsers] = useState<User[]>([]);
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/api/getAllUsers`);
-        console.log(response.data);
+        const response = await axios.get(`/api/getAllUsers`);
         setUsers(response.data.data);
       } catch (error) {
         console.log(error);
       }
     };
     getUsers();
-  }, [apiUrl]);
+  }, []);
   const deleteUser = async (email: string) => {
     try {
-      await axios.delete(`${apiUrl}/api/deleteUser`, { data: { email } });
+      await axios.delete(`/api/deleteUser`, { data: { email } });
     } catch (error) {
       console.log(error);
     }

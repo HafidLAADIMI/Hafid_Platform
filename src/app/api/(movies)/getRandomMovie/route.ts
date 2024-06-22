@@ -7,7 +7,6 @@ export const GET = async (request: Request) => {
     await connectDb();
     const { searchParams } = new URL(request.url);
     const type = searchParams.get("type");
-    console.log(type);
     if (type === "Serie") {
       movie = await Movies.aggregate([
         {

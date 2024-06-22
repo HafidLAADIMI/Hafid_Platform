@@ -7,16 +7,15 @@ export const PUT = async (request: Request) => {
   try {
     await connectDb();
 
-    const { oldTitle,newMovie } = await request.json();
-  
+    const { oldTitle, newMovie } = await request.json();
 
     const session = await auth();
-    // if (!session) {
-    //   return NextResponse.json({
-    //     message: "you are not authenticated",
-    //     status: 401,
-    //   });
-    // }
+    if (!session) {
+      return NextResponse.json({
+        message: "you are not authenticated",
+        status: 401,
+      });
+    }
 
     if (!oldTitle || !newMovie) {
       return NextResponse.json({

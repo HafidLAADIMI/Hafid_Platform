@@ -5,13 +5,13 @@ import connectDb from "@/app/Backend/models/db";
 export const GET = async (request: Request) => {
   try {
     await connectDb();
-    // const session = await auth();
-    // if (!session) {
-    //   return NextResponse.json({
-    //     message: "you are not authenticated",
-    //     status: 401,
-    //   });
-    // }
+    const session = await auth();
+    if (!session) {
+      return NextResponse.json({
+        message: "you are not authenticated",
+        status: 401,
+      });
+    }
     const list = await List.find();
     if (!list) {
       return NextResponse.json({

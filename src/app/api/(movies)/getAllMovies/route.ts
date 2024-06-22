@@ -5,12 +5,12 @@ import Movies from "@/app/Backend/models/Movies";
 export const GET = async (request: Request) => {
   try {
     const session = await auth();
-    // if (!session) {
-    //   return NextResponse.json({
-    //     message: "you are not authenticated",
-    //     status: 401,
-    //   });
-    // }
+    if (!session) {
+      return NextResponse.json({
+        message: "you are not authenticated",
+        status: 401,
+      });
+    }
     await connectDb();
     const movie = await Movies.find();
     if (!movie) {

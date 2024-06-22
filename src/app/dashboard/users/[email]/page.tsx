@@ -4,7 +4,6 @@ import { useState, useMemo, FormEvent } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
 function Page() {
-  const apiUrl = process.env.AUTH_URL;
   const params = useParams();
   const oldEmail = decodeURIComponent(params.email as string);
   console.log(oldEmail);
@@ -42,7 +41,7 @@ function Page() {
     e.preventDefault();
 
     try {
-      await axios.put(`${apiUrl}/api/updateUser`, { oldEmail, newUser });
+      await axios.put(`/api/updateUser`, { oldEmail, newUser });
       console.log("user added");
       setMessage("you have successfuly added the user");
       clearUserForm();

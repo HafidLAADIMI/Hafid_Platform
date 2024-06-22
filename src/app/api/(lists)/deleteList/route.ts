@@ -6,14 +6,14 @@ export const DELETE = async (request: Request) => {
   try {
     await connectDb();
     const session = await auth();
-    const {title}=await request.json();
-   
-    // if (!session) {
-    //   return NextResponse.json({
-    //     message: "you are not authenticated",
-    //     status: 401,
-    //   });
-    // }
+    const { title } = await request.json();
+
+    if (!session) {
+      return NextResponse.json({
+        message: "you are not authenticated",
+        status: 401,
+      });
+    }
     if (!title) {
       return NextResponse.json({
         message: "you should provied a title",

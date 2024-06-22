@@ -14,23 +14,22 @@ interface Movie {
   isSeries: boolean;
 }
 function Page() {
-  const apiUrl = process.env.AUTH_URL;
   const router = useRouter();
   const [movies, setMovies] = useState<Movie[]>([]);
   useEffect(() => {
     const getMovies = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/api/getAllMovies`);
+        const response = await axios.get(`/api/getAllMovies`);
         setMovies(response.data.movie);
       } catch (error: any) {
         console.log(error);
       }
     };
     getMovies();
-  }, [apiUrl]);
+  }, []);
   const deleteMovie = async (title: string) => {
     try {
-      await axios.delete(`${apiUrl}/api/deleteMovie`, { data: { title } });
+      await axios.delete(`/api/deleteMovie`, { data: { title } });
     } catch (error: any) {
       console.log(error);
     }

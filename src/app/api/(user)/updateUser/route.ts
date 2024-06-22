@@ -8,7 +8,12 @@ export const PUT = async (request: Request) => {
     await connectDb();
     const session = await auth();
     const { oldEmail, newUser } = await request.json();
-
+    if (!session) {
+      return NextResponse.json({
+        message: "you are not authenticated",
+        status: 401,
+      });
+    }
     if (!oldEmail || !newUser) {
       return NextResponse.json({
         message: "you are not authenticated",
