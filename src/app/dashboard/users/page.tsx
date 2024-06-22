@@ -17,139 +17,122 @@ interface User {
 
 function Page() {
   const router = useRouter();
-  const [search, setSearch] = useState<string>('');
+  const [search, setSearch] = useState<string>("");
   const [users, setUsers] = useState<User[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
-  const img = "/noavatar.jpg";
+  const defaultImage = "/noavatar.jpg";
 
   useEffect(() => {
-    const getUsers = async () => {
+    const fetchUsers = async () => {
       try {
         const response = await axios.get(`/api/getAllUsers`);
         setUsers(response.data.data);
-        setFilteredUsers(response.data.data); // Initialize filteredUsers
+        setFilteredUsers(response.data.data);
       } catch (error) {
-        console.log(error);
+        console.error("Error fetching users:", error);
       }
     };
-    getUsers();
+
+    fetchUsers();
   }, []);
 
   useEffect(() => {
-    if (search) {
-      const filtered = users.filter((user) =>
-        user.email.toLowerCase().includes(search.toLowerCase())
-      );
-      setFilteredUsers(filtered);
-    } else {
-      setFilteredUsers(users); // Reset to original users list if search is empty
-    }
+    const filterUsers = search
+      ? users.filter((user) =>
+          user.email.toLowerCase().includes(search.toLowerCase())
+        )
+      : users;
+
+    setFilteredUsers(filterUsers);
   }, [search, users]);
 
-  const deleteUser = async (email: string) => {
+  const handleDeleteUser = async (email: string) => {
     try {
       await axios.delete(`/api/deleteUser`, { data: { email } });
-      setUsers(users.filter((user) => user.email !== email)); // Update local state
+      setUsers((prevUsers) => prevUsers.filter((user) => user.email !== email));
     } catch (error) {
-      console.log(error);
+      console.error("Error deleting user:", error);
     }
   };
 
   return (
-    <div className="flex flex-col gap-2 mt-24 md:ml-[22vw] text-slate-300 p-4">
-      <div className="flex flex-row justify-between items-center w-full">
-        <div className="flex flex-row gap-2 text-slate-300 bg-slate-800 rounded-lg items-center pr-2">
+    <div className="flex flex-col gap-6 mt-24 md:ml-[22vw] text-slate-300 p-6">
+      <div className="flex flex-row justify-between items-center w-full mb-4">
+        <div className="flex items-center bg-slate-800 rounded-lg">
           <input
-            className="flex pl-3 text-slate-300 outline-none h-10 bg-slate-800 rounded-lg"
+            className="pl-3 text-slate-300 outline-none h-10 bg-slate-800 rounded-lg"
             placeholder="Search a user ..."
+            value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <FaSearch className="text-2xl text-slate-300" />
+          <FaSearch className="text-2xl text-slate-300 ml-2" />
         </div>
         <Link href="/dashboard/users/addUser">
-          <button className="h-10 w-16 rounded text-white bg-yellow-500 cursor-pointer">
+          <button className="h-10 w-24 rounded bg-yellow-500 text-white hover:bg-yellow-600 transition-colors">
             Add
           </button>
         </Link>
       </div>
-      <table className="w-full rounded-sm bg-slate-800 border border-slate-700 border-solid">
-        <thead>
-          <tr className="bg-blue-500">
-            <th className="border border-solid border-slate-700 px-4 py-2">
-              Photo
-            </th>
-            <th className="border border-solid border-slate-700 px-4 py-2">
-              Email
-            </th>
-            <th className="border border-solid border-slate-700 px-4 py-2">
-              Created At
-            </th>
-            <th className="border border-solid border-slate-700 px-4 py-2">
-              Role
-            </th>
-            <th className="border border-solid border-slate-700 px-4 py-2">
-              Action
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredUsers?.map((user) => (
-            <tr
-              key={user.id}
-              className="bg-blue-600 border border-solid border-slate-700"
-            >
-              <td className="border border-solid border-slate-700 px-4 py-2">
-                {user.image ? (
-                  <div className="flex items-center gap-3">
-                    <Image
-                      height={300}
-                      width={300}
-                      alt="img"
-                      src={`/${user.image}`}
-                      className="h-10 w-10 object-cover rounded-full"
-                    />
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-3">
-                    <Image
-                      height={300}
-                      width={300}
-                      alt="img"
-                      src={img}
-                      className="h-10 w-10 object-cover rounded-full"
-                    />
-                  </div>
-                )}
-              </td>
-              <td className="border border-solid border-slate-700 px-4 py-2">
-                {user.email}
-              </td>
-              <td className="border border-solid border-slate-700 px-4 py-2">
-                {user.createdAt}
-              </td>
-              <td className="border border-solid border-slate-700 px-4 py-2">
-                {user.isAdmin ? "Admin" : "Client"}
-              </td>
-              <td>
-                <div className="flex pl-5 flex-row gap-2">
-                  <button
-                    onClick={() => router.push(`/dashboard/users/${user.email}`)}
-                    className="h-10 w-16 rounded cursor-pointer bg-green-600"
-                  >
-                    Update
-                  </button>
-                  <button
-                    onClick={() => deleteUser(user.email)}
-                    className="h-10 w-16 rounded cursor-pointer bg-red-600"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </td>
+      <div className="overflow-x-auto">
+        <table className="w-full bg-slate-800 border border-slate-700 rounded-sm">
+          <thead className="bg-blue-500 text-white">
+            <tr>
+              <th className="px-4 py-2 text-left">Photo</th>
+              <th className="px-4 py-2 text-left">Email</th>
+              <th className="px-4 py-2 text-left">Created At</th>
+              <th className="px-4 py-2 text-left">Role</th>
+              <th className="px-4 py-2 text-left">Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredUsers?.map((user) => (
+              <tr
+                key={user.id}
+                className="border-b border-gray-200 hover:bg-slate-600 transition duration-200"
+              >
+                <td className="px-4 py-2">
+                  <Image
+                    height={40}
+                    width={40}
+                    alt="User Image"
+                    src={user.image ? `/${user.image}` : defaultImage}
+                    className="h-10 w-10 object-cover rounded-full"
+                  />
+                </td>
+                <td className="px-4 py-2">{user.email}</td>
+                <td className="px-4 py-2">{user.createdAt}</td>
+                <td className="px-4 py-2">
+                  <span
+                    className={`py-1 px-3 rounded-sm ${
+                      user.isAdmin ? "bg-red-600" : "bg-green-600"
+                    }`}
+                  >
+                    {user.isAdmin ? "Admin" : "Client"}
+                  </span>
+                </td>
+                <td className="px-4 py-2">
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() =>
+                        router.push(`/dashboard/users/${user.email}`)
+                      }
+                      className="h-10 w-20 rounded bg-green-600 text-white hover:bg-green-700 transition-colors"
+                    >
+                      Update
+                    </button>
+                    <button
+                      onClick={() => handleDeleteUser(user.email)}
+                      className="h-10 w-20 rounded bg-red-600 text-white hover:bg-red-700 transition-colors"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

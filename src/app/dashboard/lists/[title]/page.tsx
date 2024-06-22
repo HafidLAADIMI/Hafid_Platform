@@ -1,252 +1,199 @@
-"use client";
-
-import React, { FormEvent, useState } from "react";
+"use client"
+import React, { FormEvent, useMemo } from "react";
 import axios from "axios";
+import { useState } from "react";
 import { useParams } from "next/navigation";
-function ListPage() {
+
+function Page() {
   const params = useParams();
   const oldTitle = decodeURIComponent(params.title as string);
-  const [listTitle, setListTitle] = useState<string>("");
-  const [listType, setListType] = useState<string>("");
-  const [listGenre, setListGenre] = useState<string>("");
-  const [movies, setMovies] = useState<any[]>([]);
+  const [image, setImage] = useState<any>();
+  const [video, setVideo] = useState<any>();
+  const [trailer, setTrailer] = useState<any>();
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [imageTitle, setImageTitle] = useState<string>("");
+  const [imageSmall, setImageSmall] = useState<string>("");
+  const [year, setYear] = useState<number>(2003);
+  const [limit, setLimit] = useState<number>(2020);
+  const [genre, setGenre] = useState<string>("");
+  const [isSerie, setIsSerie] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  const [movieTitle, setMovieTitle] = useState<string>("");
-  const [movieDescription, setMovieDescription] = useState<string>("");
-  const [movieImage, setMovieImage] = useState<string | ArrayBuffer | null>(
-    null
-  );
-  const [movieTrailer, setMovieTrailer] = useState<string | ArrayBuffer | null>(
-    null
-  );
-  const [movieVideo, setMovieVideo] = useState<string | ArrayBuffer | null>(
-    null
-  );
-  const [movieYear, setMovieYear] = useState<number>(2003);
-  const [movieLimit, setMovieLimit] = useState<number>(2020);
-  const [movieGenre, setMovieGenre] = useState<string>("");
-  const [movieIsSeries, setMovieIsSeries] = useState<boolean>(false);
-
-  const handleFile =
-    (setFile: (file: string | ArrayBuffer | null) => void) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFile(reader.result);
-      };
-      if (file) reader.readAsDataURL(file);
+  const handleImage = (e: any) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImage(reader.result);
     };
+    reader.readAsDataURL(file);
+  };
 
   const clearMovieForm = () => {
-    setMovieTitle("");
-    setMovieDescription("");
-    setMovieImage(null);
-    setMovieTrailer(null);
-    setMovieVideo(null);
-    setMovieYear(2003);
-    setMovieLimit(2020);
-    setMovieGenre("");
-    setMovieIsSeries(false);
+    setImage(null);
+    setVideo(null);
+    setTrailer(null);
+    setTitle("");
+    setDescription("");
+    setImageTitle("");
+    setImageSmall("");
+    setYear(2003);
+    setLimit(2020);
+    setGenre("");
+    setIsSerie(false);
+    setMessage("");
   };
 
-  const addMovieToList = (e: FormEvent) => {
+  const newMovie = useMemo(
+    () => ({
+      title: title,
+      desc: description,
+      img: image,
+      imgTitle: imageTitle,
+      imgSm: imageSmall,
+      trailer: trailer,
+      video: video,
+      year: year,
+      limit: limit,
+      genre: genre,
+      isSeries: isSerie,
+    }),
+    [title, description, image, imageTitle, imageSmall, trailer, video, year, limit, genre, isSerie]
+  );
+
+  const updateMovie = async (e: FormEvent) => {
     e.preventDefault();
-    const newMovie = {
-      title: movieTitle,
-      desc: movieDescription,
-      img: movieImage,
-      trailer: movieTrailer,
-      video: movieVideo,
-      year: movieYear,
-      limit: movieLimit,
-      genre: movieGenre,
-      isSeries: movieIsSeries,
-    };
-    setMovies([...movies, newMovie]);
 
-    clearMovieForm();
-  };
-
-  const clearListForm = () => {
-    setListTitle("");
-    setListType("");
-    setListGenre("");
-    setMovies([]);
-  };
-
-  const updateList = async (e: FormEvent) => {
-    e.preventDefault();
-    const newList = {
-      title: listTitle,
-      type: listType,
-      genre: listGenre,
-      content: movies,
-    };
     try {
-      await axios.put(`/api/updateList`, { oldTitle, newList });
-      console.log("List added");
-      setMessage("You have successfully updated the list");
-      clearListForm();
+      await axios.put(`/api/updateMovie`, { oldTitle, newMovie });
+      console.log("movie updated");
+      setMessage("You have successfully updated the movie");
+      clearMovieForm();
     } catch (error: any) {
-      console.error(error);
-      setMessage("There was an error updating the list");
+      console.error("Error updating movie:", error);
+      setMessage("There was an error updating the movie");
     }
   };
 
   return (
-    <div className="flex flex-col ml-[15%] md:ml-[23vw] rounded w-[75vw] mt-24 items-center gap-7 px-4 backdrop-blur-sm box-border bg-slate-800/70 border border-slate-700 border-solid">
-      <form onSubmit={addMovieToList} className="flex flex-col gap-7 w-full">
-        <h2 className="text-xl font-bold text-white">Add Movie to List</h2>
-        <input
-          className="outline rounded-lg bg-slate-700 p-2 text-white"
-          type="text"
-          name="movieTitle"
-          placeholder="Movie Title"
-          value={movieTitle}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setMovieTitle(e.target.value)
-          }
-          required
-        />
-        <input
-          className="outline rounded-lg bg-slate-700 p-2 text-white"
-          type="text"
-          name="movieDescription"
-          placeholder="Movie Description"
-          value={movieDescription}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setMovieDescription(e.target.value)
-          }
-        />
-        <input
-          className="outline rounded-lg bg-slate-700 p-2 text-white"
-          type="file"
-          name="movieImage"
-          accept="image/*"
-          onChange={handleFile(setMovieImage)}
-        />
-        <input
-          className="outline rounded-lg bg-slate-700 p-2 text-white"
-          type="text"
-          placeholder="trailer"
-          name="movieTrailer"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setMovieTrailer(e.target.value)
-          }
-        />
-        <input
-          className="outline rounded-lg bg-slate-700 p-2 text-white"
-          type="text"
-          name="movieVideo"
-          placeholder="video"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setMovieVideo(e.target.value)
-          }
-        />
-        <input
-          className="outline rounded-lg bg-slate-700 p-2 text-white"
-          type="number"
-          name="movieYear"
-          placeholder="Movie Year"
-          value={movieYear}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setMovieYear(Number(e.target.value))
-          }
-        />
-        <input
-          className="outline rounded-lg bg-slate-700 p-2 text-white"
-          type="number"
-          name="movieLimit"
-          placeholder="Movie Limit"
-          value={movieLimit}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setMovieLimit(Number(e.target.value))
-          }
-        />
-        <input
-          className="outline rounded-lg bg-slate-700 p-2 text-white"
-          type="text"
-          name="movieGenre"
-          placeholder="Movie Genre"
-          value={movieGenre}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setMovieGenre(e.target.value)
-          }
-        />
-        <div className="flex flex-row gap-3 items-center justify-center outline rounded-lg bg-slate-700 p-2 text-white">
-          <label>Is Series</label>
+    <div className="flex flex-col md:mx-auto md:w-2/3 rounded-lg mt-12 p-6 bg-gray-800 bg-opacity-80 border border-gray-700">
+      <form onSubmit={updateMovie} className="flex flex-col gap-6">
+        <label className="flex flex-col">
+          <span className="text-gray-300">New Image</span>
           <input
-            className="h-5 w-5"
-            type="checkbox"
-            name="movieIsSeries"
-            checked={movieIsSeries}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setMovieIsSeries(e.target.checked)
-            }
+            className="mt-1 px-4 py-2 rounded-lg bg-gray-700 text-gray-200 focus:outline-none"
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleImage}
           />
+        </label>
+
+        <input
+          className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200 focus:outline-none"
+          type="text"
+          name="trailer"
+          placeholder="New Trailer"
+          value={trailer}
+          onChange={(e) => setTrailer(e.target.value)}
+        />
+
+        <input
+          className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200 focus:outline-none"
+          type="text"
+          name="video"
+          placeholder="New Video"
+          value={video}
+          onChange={(e) => setVideo(e.target.value)}
+        />
+
+        <input
+          className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200 focus:outline-none"
+          type="text"
+          name="title"
+          placeholder="New Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+
+        <input
+          className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200 focus:outline-none"
+          type="text"
+          name="desc"
+          placeholder="New Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <input
+          className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200 focus:outline-none"
+          type="text"
+          name="imgTitle"
+          placeholder="New Image Title"
+          value={imageTitle}
+          onChange={(e) => setImageTitle(e.target.value)}
+        />
+
+        <input
+          className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200 focus:outline-none"
+          type="text"
+          name="imgSm"
+          placeholder="New Small Image"
+          value={imageSmall}
+          onChange={(e) => setImageSmall(e.target.value)}
+        />
+
+        <input
+          className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200 focus:outline-none"
+          type="number"
+          name="year"
+          placeholder="New Year"
+          value={year}
+          onChange={(e) => setYear(parseInt(e.target.value))}
+        />
+
+        <input
+          className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200 focus:outline-none"
+          type="number"
+          name="limit"
+          placeholder="New Limit"
+          value={limit}
+          onChange={(e) => setLimit(parseInt(e.target.value))}
+        />
+
+        <input
+          className="px-4 py-2 rounded-lg bg-gray-700 text-gray-200 focus:outline-none"
+          type="text"
+          name="genre"
+          placeholder="New Genre"
+          value={genre}
+          onChange={(e) => setGenre(e.target.value)}
+        />
+
+        <div className="flex items-center">
+          <label className="flex items-center gap-2 text-gray-300">
+            <input
+              className="h-5 w-5"
+              type="checkbox"
+              name="serie"
+              checked={isSerie}
+              onChange={(e) => setIsSerie(e.target.checked)}
+            />
+            <span>Is Serie</span>
+          </label>
         </div>
+
         <button
-          className="w-full h-12 cursor-pointer rounded-lg bg-blue-800 text-slate-200 mb-4"
+          className="px-6 py-3 rounded-lg bg-blue-800 text-gray-200 hover:bg-blue-700 focus:outline-none"
           type="submit"
         >
-          Add Movie to List
+          Submit
         </button>
+
+        <p className="text-yellow-400 my-2">{message}</p>
       </form>
-      <form onSubmit={updateList} className="flex flex-col gap-7 w-full">
-        <h2 className="text-xl font-bold text-white">Create List</h2>
-        <input
-          className="outline rounded-lg bg-slate-700 p-2 text-white"
-          type="text"
-          name="listTitle"
-          placeholder="List Title"
-          value={listTitle}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setListTitle(e.target.value)
-          }
-          required
-        />
-        <input
-          className="outline rounded-lg bg-slate-700 p-2 text-white"
-          type="text"
-          name="listType"
-          placeholder="List Type"
-          value={listType}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setListType(e.target.value)
-          }
-        />
-        <input
-          className="outline rounded-lg bg-slate-700 p-2 text-white"
-          type="text"
-          name="listGenre"
-          placeholder="List Genre"
-          value={listGenre}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setListGenre(e.target.value)
-          }
-        />
-        <button
-          className="w-full h-12 cursor-pointer rounded-lg bg-blue-800 text-slate-200 mb-4"
-          type="submit"
-        >
-          Submit List
-        </button>
-        <p className="text-amber-600 my-2">{message}</p>
-      </form>
-      <div className="w-full">
-        <h2 className="text-xl font-bold text-white">Movies in List</h2>
-        {movies.map((movie, index) => (
-          <div key={index} className="bg-slate-700 p-4 rounded-lg mb-2">
-            <h3 className="text-white">{movie.title}</h3>
-            <p className="text-gray-300">{movie.desc}</p>
-            {/* Display other movie details as needed */}
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
 
-export default ListPage;
+export default Page;

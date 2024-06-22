@@ -141,8 +141,8 @@ function Page() {
 
   if (session) {
     return (
-      <div className="flex flex-col w-screen md:ml-[22vw] md:items-start items-center gap-4 p-3">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-2">
+      <div className="flex flex-col w-screen md:ml-[22vw] md:items-start items-center gap-6 p-6">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4">
           <CardDash props={user} />
           <CardDash props={movie} />
           <CardDash props={list} />
@@ -157,18 +157,18 @@ function Page() {
     );
   } else {
     return (
-      <div className="bg-black items-center md:ml-[12vw] justify-center flex font-sans h-screen w-screen">
-        <div className="flex flex-col backdrop-blur-sm box-border px-1 bg-slate-800/70 border border-slate-700 border-solid gap-2 items-center rounded-lg p-4  md:mt-0 md:mx-36 lg:mx-52 xl:mx-64">
+      <div className="bg-black flex items-center justify-center h-screen w-screen">
+        <div className="flex flex-col items-center backdrop-blur-sm bg-slate-800/70 border border-slate-700 rounded-lg p-6 gap-4">
           <Link href="/">
             <Image
               src={logo}
               height={300}
               width={400}
               alt="logo"
-              className="h-[250px] w-[350px] object-contain hover:scale-105 transition ease-in duration-500 cursor-pointer"
+              className="h-[250px] w-[350px] object-contain hover:scale-105 transition-transform duration-500 cursor-pointer"
             />
           </Link>
-          <p className="break-words text-slate-300 whitespace-normal text-ellipsis">
+          <p className="text-slate-300 text-center">
             Welcome to{" "}
             <span className="text-blue-800 cursor-pointer">
               <Link href="/">Hafid Platform</Link>
@@ -182,17 +182,11 @@ function Page() {
             already a member, or sign up to start your cinematic adventure with
             Hafid Platform today!
           </p>
-          <div className="flex flex-row gap-2">
-            <button
-              className="bg-slate-700 h-10 w-24 border-slate-600 border border-solid rounded-lg hover:bg-black hover:scale-105 transition ease-in duration-300 text-slate-300"
-              type="submit"
-            >
+          <div className="flex gap-4">
+            <button className="bg-slate-700 h-10 w-24 border border-slate-600 rounded-lg hover:bg-black hover:scale-105 transition-transform duration-300 text-slate-300">
               <Link href="/auth">Login</Link>
             </button>
-            <button
-              className="bg-slate-700 h-10 w-24 border-slate-600 border border-solid rounded-lg hover:bg-black hover:scale-105 transition ease-in duration-300 text-slate-300"
-              type="submit"
-            >
+            <button className="bg-slate-700 h-10 w-24 border border-slate-600 rounded-lg hover:bg-black hover:scale-105 transition-transform duration-300 text-slate-300">
               <Link href="/login">Register</Link>
             </button>
           </div>

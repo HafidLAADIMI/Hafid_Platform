@@ -5,9 +5,12 @@ import { FaRegCirclePlay } from "react-icons/fa6";
 import { FaInfoCircle } from "react-icons/fa";
 import { useTypeContext } from "@/typeContext";
 import axios from "axios";
+import Link from "next/link";
+import { Url } from "url";
 interface Film {
   img: string;
   desc: string;
+  video:string;
 }
 function Featured() {
   const { type } = useTypeContext();
