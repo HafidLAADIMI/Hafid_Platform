@@ -157,22 +157,26 @@ function Page() {
     );
   } else {
     return (
-      <div className="bg-black flex items-center justify-center h-screen w-screen">
-        <div className="flex flex-col items-center backdrop-blur-sm bg-slate-800/70 border border-slate-700 rounded-lg p-6 gap-4">
+      <div
+        style={{}}
+        className="  bg-black md:ml-[10vw] items-center justify-center flex font-sans h-screen w-screen "
+      >
+        <div className="flex flex-col backdrop-blur-sm box-border md:px-1 bg-slate-800/70 border border-slate-700 border-solid  gap-2 items-center rounded-lg py-3 px-10 md:p-4   mt-0 md:mx-36 lg:mx-52 xl:mx-64">
           <Link href="/">
             <Image
               src={logo}
               height={300}
               width={400}
               alt="logo"
-              className="h-[250px] w-[350px] object-contain hover:scale-105 transition-transform duration-500 cursor-pointer"
+              className=" h-[250px] w-[350px]  object-contain hover:scale-105 transition ease-in duration-500 cursor-pointer   "
             />
           </Link>
-          <p className="text-slate-300 text-center">
+          <p className=" break-words text-slate-300 whitespace-normal text-ellipsis ">
             Welcome to{" "}
-            <span className="text-blue-800 cursor-pointer">
-              <Link href="/">Hafid Platform</Link>
-            </span>
+            <span className=" text-blue-800 cursor-pointer">
+              {" "}
+              <Link href="/">Hafid Platform</Link>{" "}
+            </span>{" "}
             , your premier destination for streaming the latest and greatest
             movies! We are thrilled to have you here. To get the most out of
             your experience, please sign in or create an account. By joining us,
@@ -182,11 +186,17 @@ function Page() {
             already a member, or sign up to start your cinematic adventure with
             Hafid Platform today!
           </p>
-          <div className="flex gap-4">
-            <button className="bg-slate-700 h-10 w-24 border border-slate-600 rounded-lg hover:bg-black hover:scale-105 transition-transform duration-300 text-slate-300">
+          <div className="flex flex-row gap-2">
+            <button
+              className="bg-slate-700 h-10 w-24 border-slate-600 border border-solid rounded-lg  hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-300"
+              type="submit"
+            >
               <Link href="/auth">Login</Link>
             </button>
-            <button className="bg-slate-700 h-10 w-24 border border-slate-600 rounded-lg hover:bg-black hover:scale-105 transition-transform duration-300 text-slate-300">
+            <button
+              className="bg-slate-700 h-10 w-24 border-slate-600 border border-solid rounded-lg  hover:bg-black hover:scale-105 transition ease-in duration-300  text-slate-300"
+              type="submit"
+            >
               <Link href="/login">Register</Link>
             </button>
           </div>
