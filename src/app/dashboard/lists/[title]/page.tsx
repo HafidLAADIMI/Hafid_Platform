@@ -96,7 +96,7 @@ function ListPage() {
   };
 
   return (
-    <div className="flex flex-col md:ml-[23vw] rounded w-[75vw] mt-24 items-center gap-7 px-4 backdrop-blur-sm box-border bg-slate-800/70 border border-slate-700 border-solid">
+    <div className="flex flex-col ml-[15%] md:ml-[23vw] rounded w-[75vw] mt-24 items-center gap-7 px-4 backdrop-blur-sm box-border bg-slate-800/70 border border-slate-700 border-solid">
       <form onSubmit={addMovieToList} className="flex flex-col gap-7 w-full">
         <h2 className="text-xl font-bold text-white">Add Movie to List</h2>
         <input

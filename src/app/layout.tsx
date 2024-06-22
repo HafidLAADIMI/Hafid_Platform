@@ -4,6 +4,7 @@ import Providers from "./provieder";
 import { TypeContextWrapper } from "@/typeContext";
 import { MovieContextWrapper } from "@/watchContext";
 import { SearchAnimeContextWrapper } from "@/searchAnimeContext";
+import { SessionContextWrapper } from "@/sessionContext";
 import Navbar from "../../components/navbar/Navbar";
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,12 +19,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className=" overflow-y-scroll bg-black  font-bold font-sans m-0 p-0  overflow-x-hidden ">
-        <Navbar/>
+        <Navbar />
         <div className="container ">
           <Providers>
             <TypeContextWrapper>
               <MovieContextWrapper>
-                <SearchAnimeContextWrapper>{children}</SearchAnimeContextWrapper>
+                <SessionContextWrapper>
+                  <SearchAnimeContextWrapper>
+                    {children}
+                  </SearchAnimeContextWrapper>
+                </SessionContextWrapper>
               </MovieContextWrapper>
             </TypeContextWrapper>
           </Providers>

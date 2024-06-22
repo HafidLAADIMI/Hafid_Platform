@@ -10,7 +10,7 @@ interface ItemProps {
 }
 function CardDash({ props }: ItemProps) {
   return (
-    <div className="flex flex-col gap-2 top-20 h-[20vh] w-[26vw] rounded-lg  bg-slate-800 items-center border border-slate-700 border-solid hover:bg-slate-700 transition ease-in duration-200 cursor-pointer ">
+    <div className="flex flex-col gap-2 top-20 justify-center h-[22vh] w-[35vw] md:w-[26vw] rounded-lg  bg-slate-800 items-center border border-slate-700 border-solid hover:bg-slate-700 transition ease-in duration-200 cursor-pointer ">
       <div className="flex flex-row items-center gap-2 justify-between  ">
         <SiVirustotal />
         Total : {props.title}

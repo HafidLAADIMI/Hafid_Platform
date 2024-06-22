@@ -6,14 +6,17 @@ import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 import { FaGoogle } from "react-icons/fa6";
-
+import { useRouter } from "next/navigation";
+import { useSessionContext } from "@/sessionContext";
 interface Props {
   session: Session | null;
 }
 function AuthFrom({ session }: Props) {
   const logo = "/mylogo.png";
   const [error, setError] = useState("");
-
+  const {setSession}=useSessionContext();
+  setSession(session);
+  const router=useRouter();
   //  verify if the email is valid
   const isValidEmail = (email: string) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -23,10 +26,27 @@ function AuthFrom({ session }: Props) {
   const login = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const email = formData.get("email");
-    const password = formData.get("password");
+    const email = formData.get("email") as string;
+    const password  = formData.get("password") as string;
+    
+    if (!isValidEmail(email )) {
+      setError("Email is invalid");
+      return;
+    }
+
+    if (!password  || password.length  < 8) {
+      setError("Password is invalid");
+      return;
+    }
     try {
-      await signIn("credentials", { email, password, redirectTo: "/movies" });
+      const res= await signIn("credentials", { email, password, redirectTo: "/movies" });
+      if(res?.error){
+        setError('invalid password or username');
+        if (res?.url) router.replace("/");
+      }
+      else{
+        setError('')
+      }
     } catch (error: any) {
       const errorMessage = error.message || "An error occurred";
       setError(errorMessage);
@@ -49,7 +69,7 @@ function AuthFrom({ session }: Props) {
           onSubmit={login}
           className="flex flex-col mt-24 backdrop-blur-sm box-border px-1 bg-slate-800/70 border border-slate-700 border-solid   gap-12 items-center shadow-sm rounded-lg  mx-4 pb-3 "
         >
-          <p>{error && error}</p>
+          <p className="text-red-600">{error && error}</p>
           <input
             type="email"
             placeholder="Email"

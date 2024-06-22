@@ -1,11 +1,11 @@
 "use client";
-import React, { useEffect } from "react";
-import Search from "../../../../components/dashboard/Search";
-import Image from "next/image";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { FaSearch } from "react-icons/fa";
 
 interface User {
   email: string;
@@ -17,30 +17,55 @@ interface User {
 
 function Page() {
   const router = useRouter();
+  const [search, setSearch] = useState<string>('');
   const [users, setUsers] = useState<User[]>([]);
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+  const img = "/noavatar.jpg";
+
   useEffect(() => {
     const getUsers = async () => {
       try {
         const response = await axios.get(`/api/getAllUsers`);
         setUsers(response.data.data);
+        setFilteredUsers(response.data.data); // Initialize filteredUsers
       } catch (error) {
         console.log(error);
       }
     };
     getUsers();
   }, []);
+
+  useEffect(() => {
+    if (search) {
+      const filtered = users.filter((user) =>
+        user.email.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilteredUsers(filtered);
+    } else {
+      setFilteredUsers(users); // Reset to original users list if search is empty
+    }
+  }, [search, users]);
+
   const deleteUser = async (email: string) => {
     try {
       await axios.delete(`/api/deleteUser`, { data: { email } });
+      setUsers(users.filter((user) => user.email !== email)); // Update local state
     } catch (error) {
       console.log(error);
     }
   };
-  const img = "/noavatar.jpg";
+
   return (
     <div className="flex flex-col gap-2 mt-24 md:ml-[22vw] text-slate-300 p-4">
       <div className="flex flex-row justify-between items-center w-full">
-        <Search placeholder="Search for a user ..." />
+        <div className="flex flex-row gap-2 text-slate-300 bg-slate-800 rounded-lg items-center pr-2">
+          <input
+            className="flex pl-3 text-slate-300 outline-none h-10 bg-slate-800 rounded-lg"
+            placeholder="Search a user ..."
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <FaSearch className="text-2xl text-slate-300" />
+        </div>
         <Link href="/dashboard/users/addUser">
           <button className="h-10 w-16 rounded text-white bg-yellow-500 cursor-pointer">
             Add
@@ -68,13 +93,13 @@ function Page() {
           </tr>
         </thead>
         <tbody>
-          {users?.map((user) => (
+          {filteredUsers?.map((user) => (
             <tr
               key={user.id}
-              className=" bg-blue-600 border border-solid border-slate-700"
+              className="bg-blue-600 border border-solid border-slate-700"
             >
               <td className="border border-solid border-slate-700 px-4 py-2">
-                {user?.image ? (
+                {user.image ? (
                   <div className="flex items-center gap-3">
                     <Image
                       height={300}
@@ -102,22 +127,13 @@ function Page() {
               <td className="border border-solid border-slate-700 px-4 py-2">
                 {user.createdAt}
               </td>
-              {user.isAdmin ? (
-                <td className="border border-solid border-slate-700 px-4 py-2">
-                  Admin
-                </td>
-              ) : (
-                <td className="border border-solid border-slate-700 px-4 py-2">
-                  Client
-                </td>
-              )}
-
+              <td className="border border-solid border-slate-700 px-4 py-2">
+                {user.isAdmin ? "Admin" : "Client"}
+              </td>
               <td>
-                <div className=" flex pl-5 flex-row gap-2">
+                <div className="flex pl-5 flex-row gap-2">
                   <button
-                    onClick={() =>
-                      router.push(`/dashboard/users/${user.email}`)
-                    }
+                    onClick={() => router.push(`/dashboard/users/${user.email}`)}
                     className="h-10 w-16 rounded cursor-pointer bg-green-600"
                   >
                     Update

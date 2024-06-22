@@ -38,7 +38,7 @@ function Table({ lastUsers, lastMovies, lastLists }: PropsItems) {
   return (
     <div className="w-[80vw] rounded-sm flex flex-col gap-2 bg-slate-800 items-center border border-slate-700 border-solid justify-center">
       <h2>Latset updates</h2>
-      <table className="w-full border-collapse bg-blue-600">
+      <table className="w-full border-collapse bg-blue-600 ">
         <thead className="bg-blue-500 text-white">
           <tr className=" border-b border-gray-200">
             <th className="py-2 px-4">Email | Title</th>
@@ -46,9 +46,9 @@ function Table({ lastUsers, lastMovies, lastLists }: PropsItems) {
             <th className="py-2 px-4">Date</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="pl-3">
           {/* users */}
-          <tr className="my-4 border-b border-gray-200">
+          <tr className="my-4 border-b border-gray-200 pl-2">
             <td className="items-center justify-center">
               <p>{lastUsers.user1.email}</p>
             </td>

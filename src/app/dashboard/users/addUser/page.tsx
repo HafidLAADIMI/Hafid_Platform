@@ -51,7 +51,7 @@ function Page() {
   };
 
   return (
-    <div className="flex flex-col md:ml-[23vw] rounded w-[75vw] mt-24 items-center gap-7 px-4 backdrop-blur-sm box-border bg-slate-800/70 border border-slate-700 border-solid">
+    <div className="flex flex-col ml-[15%] md:ml-[23vw] rounded z-0 w-[75vw] mt-24 items-center gap-7 px-4 backdrop-blur-sm box-border bg-slate-800/70 border border-slate-700 border-solid">
       <form onSubmit={addUser} className=" flex flex-col gap-7 mt-6 ">
         <input
           className="flex h-[10vh] outline rounded-lg bg-slate-700 pl-5 "
